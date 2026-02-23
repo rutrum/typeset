@@ -1,0 +1,83 @@
+// ==========================================================================
+// Table of Contents
+// ==========================================================================
+
+.toc {
+  font-size: var(--font-size-sm);
+}
+
+.toc-title {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-md);
+}
+
+.toc-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+// Nested lists
+.toc-list .toc-list {
+  padding-left: var(--spacing-md);
+  margin-top: var(--spacing-xs);
+  border-left: 1px solid var(--color-border);
+}
+
+.toc-item {
+  margin-bottom: var(--spacing-xs);
+}
+
+.toc-link {
+  display: block;
+  padding: var(--spacing-xs) 0;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  line-height: var(--line-height-tight);
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+// Active state (can be enhanced with JS)
+.toc-link.active {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+// --------------------------------------------------------------------------
+// TOC in Sidebar (default desktop view)
+// --------------------------------------------------------------------------
+
+.page-toc {
+  .toc {
+    padding-right: var(--spacing-md);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Inline TOC (alternative placement)
+// --------------------------------------------------------------------------
+
+.toc--inline {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-md);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+
+  .toc-title {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .toc-list .toc-list {
+    border-left: none;
+    padding-left: var(--spacing-lg);
+  }
+}

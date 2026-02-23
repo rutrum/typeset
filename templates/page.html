@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+
+{% block content %}
+{% set show_toc = page.toc and config.extra.show_toc | default(value=true) %}
+{% set toc_depth = config.extra.toc_depth | default(value=3) %}
+
+<div class="{% if show_toc %}page-layout{% else %}page-layout--simple{% endif %}">
+    {# Table of Contents (sidebar) #}
+    {% if show_toc %}
+    <aside class="page-toc">
+        {{ macros::toc(toc=page.toc, depth=toc_depth) }}
+    </aside>
+    {% endif %}
+
+    {# Main Content #}
+    <article class="page-content">
+        <header class="article-header">
+            <h1 class="article-title">{{ page.title }}</h1>
+            {{ macros::post_meta(page=page) }}
+        </header>
+
+        <div class="article-content">
+            {{ page.content | safe }}
+        </div>
+
+        <footer class="article-footer">
+            {# Previous/Next Navigation #}
+            {% if page.lower or page.higher %}
+            <nav class="post-nav" aria-label="Post navigation">
+                {% if page.higher %}
+                <div class="post-nav-link post-nav-link--prev">
+                    <span class="post-nav-label">&larr; Previous</span>
+                    <a href="{{ page.higher.permalink }}">{{ page.higher.title }}</a>
+                </div>
+                {% endif %}
+
+                {% if page.lower %}
+                <div class="post-nav-link post-nav-link--next">
+                    <span class="post-nav-label">Next &rarr;</span>
+                    <a href="{{ page.lower.permalink }}">{{ page.lower.title }}</a>
+                </div>
+                {% endif %}
+            </nav>
+            {% endif %}
+        </footer>
+    </article>
+</div>
+{% endblock %}

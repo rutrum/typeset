@@ -1,0 +1,309 @@
+// ==========================================================================
+// Components
+// ==========================================================================
+
+// --------------------------------------------------------------------------
+// Site Header & Navigation
+// --------------------------------------------------------------------------
+
+.site-header {
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+  }
+}
+
+.site-title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--spacing-lg);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Site Footer
+// --------------------------------------------------------------------------
+
+.site-footer {
+  text-align: center;
+
+  .footer-inner {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+  }
+
+  a {
+    color: var(--color-text-muted);
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Tags
+// --------------------------------------------------------------------------
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all 0.15s ease;
+
+  &:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+}
+
+// Larger tag display (for taxonomy pages)
+.tag--large {
+  padding: 0.3em 0.75em;
+  font-size: var(--font-size-base);
+}
+
+// --------------------------------------------------------------------------
+// Post List (Section/Taxonomy listings)
+// --------------------------------------------------------------------------
+
+.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-item {
+  padding: var(--spacing-lg) 0;
+  border-bottom: 1px solid var(--color-border);
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.post-item-title {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-xs);
+
+  a {
+    color: var(--color-text);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+}
+
+.post-item-meta {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-sm);
+}
+
+.post-item-date {
+  font-family: var(--font-mono);
+}
+
+.post-item-summary {
+  color: var(--color-text-muted);
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Pagination
+// --------------------------------------------------------------------------
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-sm);
+}
+
+.pagination-link {
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+
+  &:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.pagination-info {
+  color: var(--color-text-muted);
+}
+
+// --------------------------------------------------------------------------
+// Taxonomy List (All tags/categories page)
+// --------------------------------------------------------------------------
+
+.taxonomy-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.taxonomy-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.taxonomy-count {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  background-color: var(--color-surface);
+  padding: 0.1em 0.4em;
+  border-radius: var(--radius-sm);
+}
+
+// --------------------------------------------------------------------------
+// Page Header (for section/taxonomy pages)
+// --------------------------------------------------------------------------
+
+.page-header {
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.page-title {
+  margin-bottom: var(--spacing-xs);
+}
+
+.page-description {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-lg);
+  margin: 0;
+}
+
+// --------------------------------------------------------------------------
+// Theme Toggle
+// --------------------------------------------------------------------------
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  // Show sun icon in dark mode, moon icon in light mode
+  .icon-sun {
+    display: none;
+  }
+
+  .icon-moon {
+    display: block;
+  }
+}
+
+// Dark mode: show sun, hide moon
+:root[data-theme="dark"] .theme-toggle {
+  .icon-sun {
+    display: block;
+  }
+
+  .icon-moon {
+    display: none;
+  }
+}
+
+// System preference dark mode fallback
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle {
+    .icon-sun {
+      display: block;
+    }
+
+    .icon-moon {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+// ==========================================================================
+// Typeset Theme - Main Stylesheet
+// ==========================================================================
+// A LaTeX/typst-inspired academic paper theme for Zola
+//
+// Import order matters:
+// 1. Variables (CSS custom properties)
+// 2. Reset (normalize defaults)
+// 3. Typography (fonts, text styles)
+// 4. Layout (page structure, grid)
+// 5. Components (nav, footer, tags, etc.)
+// 6. Sidenotes (Tufte-style margin notes)
+// 7. TOC (table of contents)
+// 8. Responsive (breakpoints, mobile)
+
+@import "variables";
+@import "reset";
+@import "typography";
+@import "layout";
+@import "components";
+@import "sidenotes";
+@import "toc";
+@import "responsive";

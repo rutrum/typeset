@@ -1,0 +1,126 @@
+{# ==========================================================================
+   Macros - Reusable Template Components
+   ========================================================================== #}
+
+{# --------------------------------------------------------------------------
+   Table of Contents
+
+   Usage: {{ macros::toc(toc=page.toc, depth=3) }}
+   -------------------------------------------------------------------------- #}
+
+{% macro toc(toc, depth=3) %}
+{% if toc %}
+<nav class="toc" aria-label="Table of Contents">
+    <h2 class="toc-title">Contents</h2>
+    {{ self::toc_list(items=toc, current_depth=1, max_depth=depth) }}
+</nav>
+{% endif %}
+{% endmacro %}
+
+{% macro toc_list(items, current_depth, max_depth) %}
+{% if items and current_depth <= max_depth %}
+<ol class="toc-list">
+    {% for item in items %}
+    <li class="toc-item">
+        <a href="{{ item.permalink }}" class="toc-link">{{ item.title }}</a>
+        {% if item.children %}
+            {{ self::toc_list(items=item.children, current_depth=current_depth + 1, max_depth=max_depth) }}
+        {% endif %}
+    </li>
+    {% endfor %}
+</ol>
+{% endif %}
+{% endmacro %}
+
+
+{# --------------------------------------------------------------------------
+   Post Meta (date, tags, reading time)
+
+   Usage: {{ macros::post_meta(page=page) }}
+   -------------------------------------------------------------------------- #}
+
+{% macro post_meta(page) %}
+<div class="article-meta">
+    {% if page.date %}
+    <time class="article-date" datetime="{{ page.date }}">
+        {{ page.date | date(format="%B %d, %Y") }}
+    </time>
+    {% endif %}
+
+    {% if page.reading_time %}
+    <span class="article-reading-time">{{ page.reading_time }} min read</span>
+    {% endif %}
+
+    {% if page.taxonomies.tags %}
+    <ul class="tags">
+        {% for tag in page.taxonomies.tags %}
+        <li><a href="{{ get_taxonomy_url(kind='tags', name=tag) }}" class="tag">{{ tag }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endmacro %}
+
+
+{# --------------------------------------------------------------------------
+   Pagination
+
+   Usage: {{ macros::pagination(paginator=paginator) }}
+   -------------------------------------------------------------------------- #}
+
+{% macro pagination(paginator) %}
+{% if paginator.number_pagers > 1 %}
+<nav class="pagination" aria-label="Pagination">
+    {% if paginator.previous %}
+    <a href="{{ paginator.previous }}" class="pagination-link" rel="prev">&larr; Newer</a>
+    {% else %}
+    <span class="pagination-link disabled">&larr; Newer</span>
+    {% endif %}
+
+    <span class="pagination-info">
+        Page {{ paginator.current_index }} of {{ paginator.number_pagers }}
+    </span>
+
+    {% if paginator.next %}
+    <a href="{{ paginator.next }}" class="pagination-link" rel="next">Older &rarr;</a>
+    {% else %}
+    <span class="pagination-link disabled">Older &rarr;</span>
+    {% endif %}
+</nav>
+{% endif %}
+{% endmacro %}
+
+
+{# --------------------------------------------------------------------------
+   Post Card (for listings)
+
+   Usage: {{ macros::post_card(page=page) }}
+   -------------------------------------------------------------------------- #}
+
+{% macro post_card(page) %}
+<article class="post-item">
+    <h2 class="post-item-title">
+        <a href="{{ page.permalink }}">{{ page.title }}</a>
+    </h2>
+
+    <div class="post-item-meta">
+        {% if page.date %}
+        <time class="post-item-date" datetime="{{ page.date }}">
+            {{ page.date | date(format="%Y-%m-%d") }}
+        </time>
+        {% endif %}
+
+        {% if page.reading_time %}
+        <span>&middot; {{ page.reading_time }} min read</span>
+        {% endif %}
+    </div>
+
+    {% if page.summary %}
+    <div class="post-item-summary">
+        {{ page.summary | safe }}
+    </div>
+    {% elif page.description %}
+    <p class="post-item-summary">{{ page.description }}</p>
+    {% endif %}
+</article>
+{% endmacro %}

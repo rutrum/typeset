@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="{{ lang | default(value='en') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}{{ config.title }}{% endblock %}</title>
+
+    {% if page.description %}
+    <meta name="description" content="{{ page.description }}">
+    {% elif section.description %}
+    <meta name="description" content="{{ section.description }}">
+    {% elif config.description %}
+    <meta name="description" content="{{ config.description }}">
+    {% endif %}
+
+    {% block head_extra %}{% endblock %}
+
+    {# Google Fonts #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    {# Main Stylesheet #}
+    <link rel="stylesheet" href="{{ get_url(path='main.css') }}">
+
+    {# Config-based CSS Variable Overrides #}
+    <style>
+        :root {
+            {% if config.extra.accent_color %}--color-accent: {{ config.extra.accent_color }};{% endif %}
+            {% if config.extra.link_color %}--color-link: {{ config.extra.link_color }};{% endif %}
+            {% if config.extra.background_color %}--color-bg: {{ config.extra.background_color }};{% endif %}
+            {% if config.extra.text_color %}--color-text: {{ config.extra.text_color }};{% endif %}
+            {% if config.extra.font_body %}--font-body: {{ config.extra.font_body }};{% endif %}
+            {% if config.extra.font_heading %}--font-heading: {{ config.extra.font_heading }};{% endif %}
+            {% if config.extra.font_mono %}--font-mono: {{ config.extra.font_mono }};{% endif %}
+        }
+    </style>
+
+    {# KaTeX Math Support (conditional) #}
+    {% set load_math = page.extra.math | default(value=false) or section.extra.math | default(value=false) or config.extra.math_everywhere | default(value=false) %}
+    {% if load_math %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.32/dist/katex.min.css" integrity="sha384-8K5tjYRcv7hr4uuSd0QJJchz//nSR63itKQtnYvhozplQjQG85jQyfkH1YIMAkUv" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.32/dist/katex.min.js" integrity="sha384-TNnVz4NqBjFIUtubnHyyCWyGiIboUd7yCCtn7k4DwDnkWWqyOEtNKYEELv0jW+NU" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.32/dist/contrib/auto-render.min.js" integrity="sha384-JKXHIJf8PKPyDFptuKZoUyMRQJAmQKj4B4xyOca62ebJhciMYGiDdq/9twUUWyZH" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });"></script>
+    {% endif %}
+
+    {# RSS/Atom Feed #}
+    {% if config.generate_feeds %}
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path='atom.xml') }}">
+    {% endif %}
+
+    {# Theme Toggle Script #}
+    <script>
+        (function() {
+            const stored = localStorage.getItem('theme');
+            if (stored) {
+                document.documentElement.setAttribute('data-theme', stored);
+            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="site-container">
+        <header class="site-header">
+            {% block header %}
+            <div class="header-inner">
+                <a href="{{ config.base_url }}" class="site-title">{{ config.title }}</a>
+
+                <div class="header-right">
+                    {% if config.extra.nav_links %}
+                    <nav>
+                        <ul class="nav-links">
+                            {% for link in config.extra.nav_links %}
+                            <li><a href="{{ link.url }}" class="nav-link">{{ link.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+                        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            {% endblock %}
+        </header>
+
+        <main class="site-main">
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="site-footer">
+            {% block footer %}
+            <div class="footer-inner">
+                <p>&copy; {{ now() | date(format="%Y") }} {{ config.extra.author | default(value=config.title) }}</p>
+            </div>
+            {% endblock %}
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        });
+    </script>
+</body>
+</html>

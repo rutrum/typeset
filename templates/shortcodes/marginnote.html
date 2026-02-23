@@ -1,0 +1,17 @@
+{#
+    Marginnote Shortcode (Unnumbered)
+
+    Creates a Tufte-style unnumbered margin note that appears in the margin on desktop
+    and toggles inline on mobile. Unlike sidenotes, these don't have reference numbers.
+
+    Usage:
+        {% marginnote() %}
+        Your margin note content here. **Markdown** is supported.
+        {% end %}
+
+    The `nth` variable is automatically provided by Zola and increments for each
+    shortcode invocation, ensuring unique IDs.
+#}
+<label for="mn-{{ nth }}" class="margin-toggle marginnote-symbol">&#8853;</label>
+<input type="checkbox" id="mn-{{ nth }}" class="margin-toggle"/>
+<span class="marginnote">{{ body | markdown(inline=true) | safe }}</span>

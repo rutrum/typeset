@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block content %}
+<div class="section-layout">
+    {# Homepage Content (from content/_index.md) #}
+    {% if section.content %}
+    <div class="home-content">
+        {{ section.content | safe }}
+    </div>
+    {% endif %}
+
+    {# Recent Posts - fetch from /blog section #}
+    {% set blog_section = get_section(path="blog/_index.md", metadata_only=false) %}
+    {% if blog_section.pages %}
+    <section class="home-posts">
+        <h2>Recent Posts</h2>
+        <ul class="post-list">
+            {% for page in blog_section.pages | slice(end=5) %}
+            <li>
+                {{ macros::post_card(page=page) }}
+            </li>
+            {% endfor %}
+        </ul>
+
+        <p style="margin-top: var(--spacing-lg);">
+            <a href="{{ get_url(path='@/blog/_index.md') }}">View all posts &rarr;</a>
+        </p>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}

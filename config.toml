@@ -1,0 +1,49 @@
+# Example Zola configuration for the Typeset theme
+# Copy this to your site's config.toml and customize
+
+base_url = "https://example.com"
+title = "My Blog"
+description = "A blog using the Typeset theme"
+default_language = "en"
+compile_sass = true
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+
+# Taxonomies (required for tags/categories)
+taxonomies = [
+    { name = "tags", feed = true },
+    { name = "categories", feed = false },
+]
+
+# Syntax highlighting (Catppuccin with light/dark mode support)
+[markdown.highlighting]
+light_theme = "catppuccin-latte"
+dark_theme = "catppuccin-frappe"
+
+[extra]
+# Author name (displayed in footer)
+author = "Your Name"
+
+# Navigation links
+nav_links = [
+    { name = "Blog", url = "/blog" },
+    { name = "About", url = "/about" },
+]
+
+# Color customization (uncomment and modify to override defaults)
+# accent_color = "#b8860b"     # Academic gold
+# link_color = "#2563eb"       # Blue
+# background_color = "#fffff8" # Warm paper white
+# text_color = "#111111"       # Near black
+
+# Typography customization (uncomment to use different fonts)
+# font_body = "'Libertinus Serif', Georgia, serif"
+# font_heading = "'Source Sans Pro', system-ui, sans-serif"
+
+# Table of contents
+show_toc = true
+toc_depth = 3
+
+# Math support (set to true to enable KaTeX on all pages)
+# Or add `math = true` to individual page frontmatter
+math_everywhere = true

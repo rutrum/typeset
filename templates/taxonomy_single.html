@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block title %}{{ term.name }} | {{ taxonomy.name | title }} | {{ config.title }}{% endblock %}
+
+{% block content %}
+<div class="section-layout">
+    <header class="page-header">
+        <p class="page-label" style="font-size: var(--font-size-sm); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--spacing-xs);">
+            {{ taxonomy.name | title }}
+        </p>
+        <h1 class="page-title">{{ term.name }}</h1>
+        <p class="page-description">{{ term.pages | length }} post{% if term.pages | length != 1 %}s{% endif %}</p>
+    </header>
+
+    {# Post Listing #}
+    {% if paginator %}
+        {% set pages = paginator.pages %}
+    {% else %}
+        {% set pages = term.pages %}
+    {% endif %}
+
+    {% if pages %}
+    <ul class="post-list">
+        {% for page in pages %}
+        <li>
+            {{ macros::post_card(page=page) }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {# Pagination #}
+    {% if paginator %}
+        {{ macros::pagination(paginator=paginator) }}
+    {% endif %}
+</div>
+{% endblock %}

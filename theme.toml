@@ -1,0 +1,41 @@
+name = "typeset"
+description = "A LaTeX/typst-inspired academic paper theme for Zola blogs"
+license = "MIT"
+homepage = "https://github.com/rutrum/typeset"
+min_version = "0.18.0"
+demo = ""
+
+[author]
+name = "rutrum"
+homepage = "https://rutrum.net"
+
+[extra]
+# Color customization (CSS color values)
+# These override the default CSS variables
+accent_color = ""      # Default: #b8860b (academic gold)
+link_color = ""        # Default: #2563eb
+background_color = ""  # Default: #fffff8 (warm off-white)
+text_color = ""        # Default: #111
+
+# Typography (Google Fonts names or font stacks)
+font_body = ""         # Default: "Crimson Pro", Georgia, serif
+font_heading = ""      # Default: "Inter", system-ui, sans-serif
+font_mono = ""         # Default: "JetBrains Mono", monospace
+
+# Features
+show_toc = true        # Show table of contents on pages
+toc_depth = 3          # Max heading depth for TOC (1-6)
+math_everywhere = false # Load KaTeX on all pages (false = per-page opt-in)
+
+# Navigation links (displayed in header)
+# Example: nav_links = [{ name = "Blog", url = "/blog" }, { name = "About", url = "/about" }]
+nav_links = []
+
+# Site author (used in footer)
+author = ""
+
+# Taxonomies (copy to your config.toml)
+# taxonomies = [
+#     { name = "tags", feed = true },
+#     { name = "categories", feed = false },
+# ]

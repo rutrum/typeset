@@ -1,0 +1,17 @@
+{#
+    Sidenote Shortcode (Numbered)
+
+    Creates a Tufte-style numbered sidenote that appears in the margin on desktop
+    and toggles inline on mobile.
+
+    Usage:
+        {% sidenote() %}
+        Your sidenote content here. **Markdown** is supported.
+        {% end %}
+
+    The `nth` variable is automatically provided by Zola and increments for each
+    shortcode invocation, ensuring unique IDs.
+#}
+<label for="sn-{{ nth }}" class="margin-toggle sidenote-number"></label>
+<input type="checkbox" id="sn-{{ nth }}" class="margin-toggle"/>
+<span class="sidenote">{{ body | markdown(inline=true) | safe }}</span>

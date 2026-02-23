@@ -1,0 +1,91 @@
+// ==========================================================================
+// Sidenotes (Tufte-style)
+// ==========================================================================
+// Sidenotes appear in the right margin on desktop and toggle inline on mobile.
+// Uses CSS checkbox hack for no-JS interactivity.
+
+// --------------------------------------------------------------------------
+// Sidenote Toggle (Hidden Checkbox)
+// --------------------------------------------------------------------------
+
+.margin-toggle {
+  display: none;
+}
+
+// --------------------------------------------------------------------------
+// Sidenote Number (Superscript)
+// --------------------------------------------------------------------------
+
+.sidenote-number {
+  cursor: pointer;
+  counter-increment: sidenote-counter;
+  // Ensure the label is inline so ::after content is visible
+  display: inline;
+
+  &::after {
+    content: counter(sidenote-counter);
+    font-size: 0.75em;
+    font-weight: 600;
+    vertical-align: super;
+    color: var(--color-accent);
+    margin-left: 0.1em;
+    margin-right: 0.3em;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Sidenote & Marginnote Content
+// --------------------------------------------------------------------------
+
+.sidenote,
+.marginnote {
+  // Position in right margin
+  float: right;
+  clear: right;
+  width: var(--sidenote-width);
+  margin-right: calc(-1 * var(--sidenote-width) - var(--spacing-lg));
+  margin-bottom: var(--spacing-md);
+
+  // Typography
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base);
+  color: var(--color-text-muted);
+
+  // Vertical alignment with reference
+  position: relative;
+}
+
+// Numbered sidenote prefix (reads counter already incremented by .sidenote-number)
+.sidenote::before {
+  content: counter(sidenote-counter) ". ";
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+// Marginnote toggle symbol (for mobile)
+.marginnote-symbol {
+  display: none;
+  cursor: pointer;
+  color: var(--color-accent);
+  font-size: 0.8em;
+  vertical-align: super;
+}
+
+// --------------------------------------------------------------------------
+// Sidenote Content Styling
+// --------------------------------------------------------------------------
+
+.sidenote,
+.marginnote {
+  p {
+    margin-bottom: var(--spacing-sm);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  code {
+    font-size: 0.9em;
+  }
+}

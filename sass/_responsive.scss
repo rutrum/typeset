@@ -1,0 +1,185 @@
+// ==========================================================================
+// Responsive Breakpoints
+// ==========================================================================
+
+// Breakpoints:
+// - Desktop: > 1100px (full three-column layout)
+// - Tablet:  768px - 1100px (sidenotes collapse, TOC inline)
+// - Mobile:  < 768px (single column)
+
+// --------------------------------------------------------------------------
+// Tablet & Below (Sidenotes Collapse)
+// --------------------------------------------------------------------------
+
+@media (max-width: 1100px) {
+  // Switch to single-column layout
+  .page-layout {
+    display: block;
+    max-width: var(--content-width);
+    margin: 0 auto;
+  }
+
+  // TOC moves inline above content
+  .page-toc {
+    position: static;
+    max-height: none;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+
+    .toc {
+      padding-right: 0;
+    }
+  }
+
+  // Sidenotes collapse to toggleable inline notes
+  .sidenote,
+  .marginnote {
+    float: none;
+    display: none;
+    width: 100%;
+    margin: var(--spacing-md) 0;
+    margin-right: 0;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--color-surface);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  // Show toggle indicator for sidenotes
+  .sidenote-number {
+    &::after {
+      cursor: pointer;
+    }
+  }
+
+  // Show marginnote toggle symbol
+  .marginnote-symbol {
+    display: inline;
+  }
+
+  // Toggle visibility when checkbox is checked
+  .margin-toggle:checked + .sidenote,
+  .margin-toggle:checked + .marginnote {
+    display: block;
+  }
+
+  // Focus state for accessibility
+  .margin-toggle:focus + .sidenote,
+  .margin-toggle:focus + .marginnote {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mobile (< 768px)
+// --------------------------------------------------------------------------
+
+@media (max-width: 768px) {
+  :root {
+    --page-padding: var(--spacing-md);
+    --font-size-base: 1rem; // Slightly smaller on mobile
+  }
+
+  // Stack header vertically
+  .site-header .header-inner {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    text-align: center;
+  }
+
+  .nav-links {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+  }
+
+  // Reduce heading sizes
+  h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-xl);
+  }
+
+  h3 {
+    font-size: var(--font-size-lg);
+  }
+
+  // Post navigation stacks
+  .post-nav {
+    flex-direction: column;
+  }
+
+  .post-nav-link {
+    max-width: 100%;
+    text-align: left;
+
+    &--next {
+      text-align: left;
+    }
+  }
+
+  // Pagination adjusts
+  .pagination {
+    flex-wrap: wrap;
+  }
+
+  // Tables scroll horizontally
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  // Code blocks
+  pre {
+    font-size: 0.8rem;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Print Styles
+// --------------------------------------------------------------------------
+
+@media print {
+  .site-header,
+  .site-footer,
+  .page-toc,
+  .post-nav,
+  .pagination {
+    display: none;
+  }
+
+  .page-layout {
+    display: block;
+    max-width: 100%;
+  }
+
+  // Show sidenotes inline for print
+  .sidenote,
+  .marginnote {
+    float: none;
+    display: block;
+    width: auto;
+    margin: var(--spacing-sm) 0;
+    margin-right: 0;
+    padding: var(--spacing-sm);
+    background: #f5f5f5;
+    font-size: 0.9em;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  // Show URLs after links
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+}
