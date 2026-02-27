@@ -9,7 +9,7 @@
   // Typography
   // --------------------------------------------------------------------------
   --font-body: "Crimson Pro", Georgia, "Times New Roman", serif;
-  --font-heading: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-heading: "EB Garamond", "Crimson Pro", Georgia, serif;
   --font-mono: "JetBrains Mono", "Fira Code", "SF Mono", Consolas, monospace;
 
   // Font sizes (1.25 modular scale)
@@ -50,6 +50,7 @@
   // Layout
   // --------------------------------------------------------------------------
   --content-width: 65ch;        // Optimal reading width
+  --content-extend: 13ch;       // How much code/tables extend into sidenote margin (~20%)
   --sidenote-width: 250px;      // Right margin for sidenotes
   --toc-width: 200px;           // Left sidebar for TOC
   --page-max-width: 1400px;     // Max container width

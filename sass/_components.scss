@@ -113,7 +113,76 @@
 }
 
 // --------------------------------------------------------------------------
-// Post List (Section/Taxonomy listings)
+// Posts by Year (Section listings)
+// --------------------------------------------------------------------------
+
+.posts-by-year {
+  margin-top: var(--spacing-lg);
+}
+
+.year-heading {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-muted);
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid var(--color-border);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.year-posts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.year-post-item {
+  display: flex;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--color-border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.year-post-date {
+  flex-shrink: 0;
+  width: 4em;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.year-post-content {
+  flex: 1;
+}
+
+.year-post-title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--color-text);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+.year-post-desc {
+  margin-top: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-base);
+}
+
+// --------------------------------------------------------------------------
+// Post List (legacy/taxonomy listings)
 // --------------------------------------------------------------------------
 
 .post-list {
@@ -205,30 +274,92 @@
 }
 
 // --------------------------------------------------------------------------
-// Taxonomy List (All tags/categories page)
+// Tag Sections (All tags page with previews)
 // --------------------------------------------------------------------------
 
-.taxonomy-list {
+.tag-sections {
+  margin-top: var(--spacing-lg);
+}
+
+.tag-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.tag-section-header {
   display: flex;
-  flex-wrap: wrap;
+  align-items: baseline;
   gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid var(--color-border);
+
+  a {
+    color: var(--color-text);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+}
+
+.tag-section-count {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.tag-section-posts {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.taxonomy-item {
+.tag-section-post {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
+  align-items: baseline;
+  gap: var(--spacing-md);
+  padding: var(--spacing-xs) 0;
+
+  time {
+    flex-shrink: 0;
+    width: 7.5em;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+  }
+
+  a {
+    color: var(--color-text);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
 }
 
-.taxonomy-count {
+.tag-section-more {
+  display: inline-block;
+  margin-top: var(--spacing-sm);
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
-  background-color: var(--color-surface);
-  padding: 0.1em 0.4em;
-  border-radius: var(--radius-sm);
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Page Label (taxonomy type label)
+// --------------------------------------------------------------------------
+
+.page-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-xs);
 }
 
 // --------------------------------------------------------------------------

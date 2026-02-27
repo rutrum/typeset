@@ -9,15 +9,26 @@
         <p class="page-description">{{ terms | length }} {{ taxonomy.name }}</p>
     </header>
 
-    <ul class="taxonomy-list">
+    <div class="tag-sections">
         {% for term in terms %}
-        <li class="taxonomy-item">
-            <a href="{{ term.permalink }}" class="tag tag--large">
-                {{ term.name }}
-            </a>
-            <span class="taxonomy-count">{{ term.pages | length }}</span>
-        </li>
+        <section class="tag-section">
+            <h2 class="tag-section-header">
+                <a href="{{ term.permalink }}">#{{ term.name }}</a>
+                <span class="tag-section-count">{{ term.pages | length }}</span>
+            </h2>
+            <ul class="tag-section-posts">
+                {% for page in term.pages | slice(end=5) %}
+                <li class="tag-section-post">
+                    <time datetime="{{ page.date }}">{{ page.date | date(format="%b %d, %Y") }}</time>
+                    <a href="{{ page.permalink }}">{{ page.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% if term.pages | length > 5 %}
+            <a href="{{ term.permalink }}" class="tag-section-more">View all {{ term.pages | length }} posts &rarr;</a>
+            {% endif %}
+        </section>
         {% endfor %}
-    </ul>
+    </div>
 </div>
 {% endblock %}

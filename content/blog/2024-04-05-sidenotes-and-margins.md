@@ -80,6 +80,23 @@ When using sidenotes, keep a few things in mind:
 
 **Mobile behavior.** On smaller screens, sidenotes transform into expandable notes that appear inline when tapped. This maintains accessibility without sacrificing the desktop reading experience.
 
+## Interaction with Code and Tables
+
+Code blocks and tables extend slightly into the sidenote margin to give technical content more breathing room.{% sidenote() %}Specifically, they extend about 20% wider than the prose column—roughly 13 characters.{% end %} When this happens, any sidenotes near these elements automatically shift below them.
+
+```python
+def example_function(parameter_one, parameter_two, parameter_three):
+    """This code block extends into the margin for better readability."""
+    result = parameter_one + parameter_two + parameter_three
+    return result
+```
+
+{% marginnote() %}
+Notice how this margin note appears below the code block rather than beside it. The layout prioritizes code readability.
+{% end %}
+
+This behavior is intentional. Code and tabular data benefit from horizontal space more than prose does, and the slight displacement of sidenotes is a worthwhile trade-off.{% sidenote() %}If you need a sidenote to appear directly beside a code block, consider restructuring so the sidenote reference appears in the paragraph before or after the code.{% end %}
+
 ## Conclusion
 
 Sidenotes represent a thoughtful approach to supplementary content.{% sidenote() %}They're one of many typographic choices that distinguish carefully designed documents from hastily assembled ones.{% end %} By placing notes alongside the relevant text, they respect your readers' attention while still providing valuable context.

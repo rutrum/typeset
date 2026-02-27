@@ -22,6 +22,7 @@ h5,
 h6 {
   font-family: var(--font-heading);
   font-weight: 600;
+  font-variant: small-caps;
   line-height: var(--line-height-tight);
   color: var(--color-text);
   margin-top: var(--spacing-xl);
@@ -202,6 +203,13 @@ pre {
   }
 }
 
+// Extend code blocks into sidenote margin (within articles)
+.article-content pre {
+  width: calc(100% + var(--content-extend));
+  max-width: calc(100% + var(--content-extend));
+  clear: right; // Push floating sidenotes down
+}
+
 // --------------------------------------------------------------------------
 // Horizontal Rules
 // --------------------------------------------------------------------------
@@ -220,6 +228,13 @@ table {
   width: 100%;
   margin: var(--spacing-lg) 0;
   font-size: var(--font-size-sm);
+}
+
+// Extend tables into sidenote margin (within articles)
+.article-content > table {
+  width: calc(100% + var(--content-extend));
+  max-width: calc(100% + var(--content-extend));
+  clear: right; // Push floating sidenotes down
 }
 
 th,

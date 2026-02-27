@@ -6,14 +6,12 @@
 {% block content %}
 <div class="section-layout">
     <header class="page-header">
-        <p class="page-label" style="font-size: var(--font-size-sm); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--spacing-xs);">
-            {{ taxonomy.name | title }}
-        </p>
-        <h1 class="page-title">{{ term.name }}</h1>
+        <p class="page-label">{{ taxonomy.name | title }}</p>
+        <h1 class="page-title">#{{ term.name }}</h1>
         <p class="page-description">{{ term.pages | length }} post{% if term.pages | length != 1 %}s{% endif %}</p>
     </header>
 
-    {# Post Listing #}
+    {# Post Listing - Grouped by Year #}
     {% if paginator %}
         {% set pages = paginator.pages %}
     {% else %}
@@ -21,13 +19,30 @@
     {% endif %}
 
     {% if pages %}
-    <ul class="post-list">
+    {% set_global current_year = 0 %}
+    <div class="posts-by-year">
         {% for page in pages %}
-        <li>
-            {{ macros::post_card(page=page) }}
-        </li>
+            {% set page_year = page.date | date(format="%Y") | int %}
+            {% if page_year != current_year %}
+                {% if current_year != 0 %}</ul>{% endif %}
+                {% set_global current_year = page_year %}
+                <h2 class="year-heading">{{ current_year }}</h2>
+                <ul class="year-posts">
+            {% endif %}
+            <li class="year-post-item">
+                <time class="year-post-date" datetime="{{ page.date }}">
+                    {{ page.date | date(format="%b %d") }}
+                </time>
+                <div class="year-post-content">
+                    <a href="{{ page.permalink }}" class="year-post-title">{{ page.title }}</a>
+                    {% if page.description %}
+                    <p class="year-post-desc">{{ page.description }}</p>
+                    {% endif %}
+                </div>
+            </li>
         {% endfor %}
-    </ul>
+        </ul>
+    </div>
     {% endif %}
 
     {# Pagination #}

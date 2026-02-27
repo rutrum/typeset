@@ -19,6 +19,17 @@
     margin: 0 auto;
   }
 
+  // Disable extended width for code/tables (no sidenote margin available)
+  .article-content {
+    pre,
+    > table,
+    .table-wrapper,
+    .table-expandable {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
   // TOC moves inline above content
   .page-toc {
     position: static;
