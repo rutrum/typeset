@@ -1,9 +1,9 @@
 # Example Zola configuration for the Typeset theme
 # Copy this to your site's config.toml and customize
 
-base_url = "https://example.com"
-title = "My Blog"
-description = "A blog using the Typeset theme"
+base_url = "https://typeset.rutrum.net"
+title = "Typeset"
+description = "Zola theme inspired by Typst and LaTeX"
 default_language = "en"
 compile_sass = true
 generate_feeds = true
@@ -47,3 +47,9 @@ toc_depth = 3
 # Math support (set to true to enable KaTeX on all pages)
 # Or add `math = true` to individual page frontmatter
 math_everywhere = true
+
+# Footer links (external links with Lucide icons)
+[[extra.footer_links]]
+text = "Source Code"
+url = "https://github.com/rutrum/typeset"
+icon = "git-branch"

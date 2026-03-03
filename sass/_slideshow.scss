@@ -1,0 +1,95 @@
+// ==========================================================================
+// Slideshow (Image Gallery)
+// ==========================================================================
+
+.slideshow {
+  position: relative;
+  margin: var(--spacing-lg) 0;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+
+  // Images
+  img {
+    display: none;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-height: 500px;
+
+    &.active {
+      display: block;
+    }
+  }
+}
+
+// Navigation buttons
+.slideshow-prev,
+.slideshow-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: white;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+
+  &:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.slideshow-prev {
+  left: var(--spacing-sm);
+}
+
+.slideshow-next {
+  right: var(--spacing-sm);
+}
+
+// Counter display
+.slideshow-counter {
+  position: absolute;
+  bottom: var(--spacing-sm);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius-sm);
+  color: white;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+}
+
+// Dark mode adjustments
+:root[data-theme="dark"] {
+  .slideshow-prev,
+  .slideshow-next {
+    background-color: rgba(255, 255, 255, 0.2);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  .slideshow-counter {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}

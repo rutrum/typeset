@@ -1,0 +1,27 @@
+{#
+    Spoiler Shortcode (CSS-only)
+
+    Creates a collapsible/expandable content section using the CSS checkbox hack.
+    No JavaScript required.
+
+    Usage:
+        {% spoiler(title="Click to reveal") %}
+        Your hidden content here. **Markdown** is supported.
+        {% end %}
+
+    Parameters:
+        title: The text shown on the toggle (default: "Spoiler")
+
+    The `nth` variable is automatically provided by Zola and increments for each
+    shortcode invocation, ensuring unique IDs.
+#}
+<div class="spoiler">
+    <input type="checkbox" id="spoiler-{{ nth }}" class="spoiler-toggle" />
+    <label for="spoiler-{{ nth }}" class="spoiler-label">
+        <span class="spoiler-icon"></span>
+        {{ title | default(value="Spoiler") }}
+    </label>
+    <div class="spoiler-content">
+        {{ body | markdown | safe }}
+    </div>
+</div>

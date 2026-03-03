@@ -57,6 +57,11 @@
     <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path='atom.xml') }}">
     {% endif %}
 
+    {# Lucide Icons (for footer links) #}
+    {% if config.extra.footer_links %}
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    {% endif %}
+
     {# Theme Toggle Script #}
     <script>
         (function() {
@@ -115,6 +120,16 @@
         <footer class="site-footer">
             {% block footer %}
             <div class="footer-inner">
+                {% if config.extra.footer_links %}
+                <div class="footer-links">
+                    {% for link in config.extra.footer_links %}
+                    <a href="{{ link.url }}" class="footer-link" {% if link.url is starting_with("http") %}target="_blank" rel="noopener"{% endif %}>
+                        {% if link.icon %}<i data-lucide="{{ link.icon }}"></i>{% endif %}
+                        {{ link.text }}
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <p>&copy; {{ now() | date(format="%Y") }} {{ config.extra.author | default(value=config.title) }}</p>
             </div>
             {% endblock %}
@@ -225,6 +240,36 @@
 
             updateActiveLink(); // Initial state
         })();
+
+        // Slideshow navigation
+        (function() {
+            const slideshows = document.querySelectorAll('.slideshow');
+            if (slideshows.length === 0) return;
+
+            slideshows.forEach(slideshow => {
+                const images = slideshow.querySelectorAll('img');
+                const prevBtn = slideshow.querySelector('.slideshow-prev');
+                const nextBtn = slideshow.querySelector('.slideshow-next');
+                const currentSpan = slideshow.querySelector('.slideshow-current');
+                const total = images.length;
+                let current = 0;
+
+                function showSlide(index) {
+                    images.forEach(img => img.classList.remove('active'));
+                    current = (index + total) % total;
+                    images[current].classList.add('active');
+                    if (currentSpan) currentSpan.textContent = current + 1;
+                }
+
+                if (prevBtn) prevBtn.addEventListener('click', () => showSlide(current - 1));
+                if (nextBtn) nextBtn.addEventListener('click', () => showSlide(current + 1));
+            });
+        })();
+
+        // Initialize Lucide icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
     </script>
 </body>
 </html>

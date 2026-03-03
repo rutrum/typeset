@@ -1,0 +1,32 @@
+{#
+    Slideshow Shortcode
+
+    Creates an image gallery with previous/next navigation.
+
+    Usage:
+        {% slideshow(images=["/img1.jpg", "/img2.jpg", "/img3.jpg"]) %}
+
+    Parameters:
+        images: Array of image paths/URLs
+
+    The `nth` variable is automatically provided by Zola and increments for each
+    shortcode invocation, ensuring unique IDs for multiple slideshows.
+#}
+<div class="slideshow" data-slideshow="{{ nth }}">
+    <button class="slideshow-prev" aria-label="Previous image">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </button>
+    <button class="slideshow-next" aria-label="Next image">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+    </button>
+    {% for image in images %}
+    <img src="{{ image }}" data-index="{{ loop.index0 }}" alt="Slide {{ loop.index }}" {% if loop.index0 == 0 %}class="active"{% endif %} />
+    {% endfor %}
+    <div class="slideshow-counter">
+        <span class="slideshow-current">1</span> / <span class="slideshow-total">{{ images | length }}</span>
+    </div>
+</div>

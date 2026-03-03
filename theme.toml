@@ -1,6 +1,7 @@
 name = "typeset"
 description = "A LaTeX/typst-inspired academic paper theme for Zola blogs"
 license = "MIT"
+version = "0.1.0"
 homepage = "https://github.com/rutrum/typeset"
 min_version = "0.18.0"
 demo = ""
@@ -30,6 +31,18 @@ math_everywhere = false # Load KaTeX on all pages (false = per-page opt-in)
 # Navigation links (displayed in header)
 # Example: nav_links = [{ name = "Blog", url = "/blog" }, { name = "About", url = "/about" }]
 nav_links = []
+
+# Footer links (external links with optional Lucide icons)
+# Example:
+# [[extra.footer_links]]
+# text = "GitHub"
+# url = "https://github.com/username"
+# icon = "github"  # Lucide icon name (optional)
+#
+# [[extra.footer_links]]
+# text = "Twitter"
+# url = "https://twitter.com/username"
+# icon = "twitter"
 
 # Site author (used in footer)
 author = ""

@@ -19,12 +19,7 @@
           ];
 
           shellHook = ''
-            echo "Typeset theme development shell"
-            echo "Zola version: $(zola --version)"
-            echo ""
-            echo "Commands:"
-            echo "  zola build    - Build the site"
-            echo "  zola serve    - Start dev server at http://127.0.0.1:1111"
+            just --list
           '';
         };
       }
