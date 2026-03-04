@@ -27,13 +27,26 @@
     {# Config-based CSS Variable Overrides #}
     <style>
         :root {
+            {# Colors - Light Mode #}
             {% if config.extra.accent_color %}--color-accent: {{ config.extra.accent_color }};{% endif %}
             {% if config.extra.link_color %}--color-link: {{ config.extra.link_color }};{% endif %}
             {% if config.extra.background_color %}--color-bg: {{ config.extra.background_color }};{% endif %}
             {% if config.extra.text_color %}--color-text: {{ config.extra.text_color }};{% endif %}
+            {# Typography #}
             {% if config.extra.font_body %}--font-body: {{ config.extra.font_body }};{% endif %}
             {% if config.extra.font_heading %}--font-heading: {{ config.extra.font_heading }};{% endif %}
             {% if config.extra.font_mono %}--font-mono: {{ config.extra.font_mono }};{% endif %}
+        }
+        {# Colors - Dark Mode Overrides #}
+        :root[data-theme="dark"] {
+            {% if config.extra.accent_color_dark %}--color-accent: {{ config.extra.accent_color_dark }};{% elif config.extra.accent_color %}--color-accent: {{ config.extra.accent_color }};{% endif %}
+            {% if config.extra.link_color_dark %}--color-link: {{ config.extra.link_color_dark }};{% elif config.extra.link_color %}--color-link: {{ config.extra.link_color }};{% endif %}
+        }
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                {% if config.extra.accent_color_dark %}--color-accent: {{ config.extra.accent_color_dark }};{% elif config.extra.accent_color %}--color-accent: {{ config.extra.accent_color }};{% endif %}
+                {% if config.extra.link_color_dark %}--color-link: {{ config.extra.link_color_dark }};{% elif config.extra.link_color %}--color-link: {{ config.extra.link_color }};{% endif %}
+            }
         }
     </style>
 
@@ -270,6 +283,166 @@
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
         }
+
+        // =================================================================
+        // Documentation Navigation
+        // =================================================================
+
+        // Docs nav expand/collapse
+        (function() {
+            const docsNav = document.querySelector('.docs-sidebar-nav');
+            if (!docsNav) return;
+
+            const toggles = docsNav.querySelectorAll('.docs-nav-toggle');
+            const STORAGE_KEY = 'typeset-docs-nav-expanded';
+
+            // Load persisted state
+            function getExpandedState() {
+                try {
+                    const stored = localStorage.getItem(STORAGE_KEY);
+                    return stored ? JSON.parse(stored) : {};
+                } catch (e) {
+                    return {};
+                }
+            }
+
+            function saveExpandedState(state) {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                } catch (e) {
+                    // localStorage unavailable
+                }
+            }
+
+            function toggleSection(toggle, forceState) {
+                const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+                const newState = forceState !== undefined ? forceState : !isExpanded;
+                const header = toggle.closest('.docs-nav-section-header');
+                const children = header ? header.nextElementSibling : null;
+
+                toggle.setAttribute('aria-expanded', newState);
+                if (children && children.classList.contains('docs-nav-children')) {
+                    children.hidden = !newState;
+                }
+
+                // Update parent item class
+                const item = toggle.closest('.docs-nav-item');
+                if (item) {
+                    item.classList.toggle('is-expanded', newState);
+                }
+
+                return newState;
+            }
+
+            // Get unique ID for a toggle (based on its link text)
+            function getToggleId(toggle) {
+                const link = toggle.closest('.docs-nav-section-header')?.querySelector('.docs-nav-link');
+                return link ? link.textContent.trim() : null;
+            }
+
+            // Initialize state
+            const state = getExpandedState();
+            toggles.forEach(toggle => {
+                const id = getToggleId(toggle);
+                const isAlreadyExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
+                // Check persisted state, but don't override if already expanded (contains current page)
+                if (id && state[id] !== undefined && !isAlreadyExpanded) {
+                    toggleSection(toggle, state[id]);
+                }
+            });
+
+            // Click handlers
+            toggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const id = getToggleId(this);
+                    const newState = toggleSection(this);
+
+                    // Persist state
+                    if (id) {
+                        const currentState = getExpandedState();
+                        currentState[id] = newState;
+                        saveExpandedState(currentState);
+                    }
+                });
+            });
+        })();
+
+        // Docs mobile navigation toggle
+        (function() {
+            const toggle = document.getElementById('docs-nav-mobile-toggle');
+            const sidebar = document.getElementById('docs-sidebar');
+            if (!toggle || !sidebar) return;
+
+            // Create overlay element
+            const overlay = document.createElement('div');
+            overlay.className = 'docs-nav-overlay';
+            document.body.appendChild(overlay);
+
+            function openNav() {
+                toggle.setAttribute('aria-expanded', 'true');
+                sidebar.classList.add('is-open');
+                document.body.classList.add('docs-nav-open');
+
+                // Focus first link in nav
+                const firstLink = sidebar.querySelector('.docs-nav-link');
+                if (firstLink) firstLink.focus();
+            }
+
+            function closeNav() {
+                toggle.setAttribute('aria-expanded', 'false');
+                sidebar.classList.remove('is-open');
+                document.body.classList.remove('docs-nav-open');
+                toggle.focus();
+            }
+
+            toggle.addEventListener('click', function() {
+                const isOpen = this.getAttribute('aria-expanded') === 'true';
+                if (isOpen) {
+                    closeNav();
+                } else {
+                    openNav();
+                }
+            });
+
+            // Close on escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && sidebar.classList.contains('is-open')) {
+                    closeNav();
+                }
+            });
+
+            // Close on overlay click
+            overlay.addEventListener('click', closeNav);
+
+            // Close on resize to desktop
+            const mediaQuery = window.matchMedia('(min-width: 901px)');
+            mediaQuery.addEventListener('change', function(e) {
+                if (e.matches && sidebar.classList.contains('is-open')) {
+                    closeNav();
+                }
+            });
+        })();
+
+        // Scroll current doc nav item into view
+        (function() {
+            const docsNav = document.querySelector('.docs-sidebar-nav');
+            const currentLink = docsNav?.querySelector('.docs-nav-link.is-current');
+
+            if (currentLink && docsNav) {
+                // Wait for any expand animations
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        currentLink.scrollIntoView({
+                            block: 'center',
+                            behavior: 'instant'
+                        });
+                    });
+                });
+            }
+        })();
     </script>
 </body>
 </html>

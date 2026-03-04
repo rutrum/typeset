@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block title %}{{ section.title }} | {{ config.title }}{% endblock %}
+
+{% block content %}
+{# Get the docs root section for navigation #}
+{% set docs_root_path = section.extra.docs_root | default(value="") %}
+{% if docs_root_path %}
+    {% set docs_root = get_section(path=docs_root_path, metadata_only=false) %}
+{% else %}
+    {# If no docs_root specified, assume this section IS the root #}
+    {% set docs_root = section %}
+{% endif %}
+
+{% set show_toc = section.toc and config.extra.show_toc | default(value=true) %}
+{% set toc_depth = config.extra.toc_depth | default(value=3) %}
+
+<div class="docs-layout">
+    {# Left Navigation Sidebar #}
+    <aside class="docs-nav" id="docs-sidebar">
+        {{ macros::docs_nav(root=docs_root, current_path=section.path) }}
+    </aside>
+
+    {# Main Content #}
+    <article class="docs-content">
+        <header class="docs-header">
+            <h1 class="docs-title">{{ section.title }}</h1>
+            {% if section.description %}
+            <p class="docs-description">{{ section.description }}</p>
+            {% endif %}
+        </header>
+
+        {% if section.content %}
+        <div class="docs-body">
+            {{ section.content | safe }}
+        </div>
+        {% endif %}
+
+        {# List child pages for this section #}
+        {% if section.pages %}
+        <nav class="docs-page-list">
+            <h2>In This Section</h2>
+            <ul>
+                {% for page in section.pages %}
+                <li>
+                    <a href="{{ page.permalink }}">{{ page.title }}</a>
+                    {% if page.description %}
+                    <p>{{ page.description }}</p>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+        {% endif %}
+
+        {# List subsections #}
+        {% if section.subsections %}
+        <nav class="docs-subsection-list">
+            {% if section.pages %}<h2>Subsections</h2>{% endif %}
+            <ul>
+                {% for subsection_path in section.subsections %}
+                {% set subsection = get_section(path=subsection_path, metadata_only=true) %}
+                <li>
+                    <a href="{{ subsection.permalink }}">{{ subsection.title }}</a>
+                    {% if subsection.description %}
+                    <p>{{ subsection.description }}</p>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+        {% endif %}
+    </article>
+
+    {# Right TOC Sidebar #}
+    <aside class="docs-toc">
+        {% if show_toc and section.toc %}
+        {{ macros::toc(toc=section.toc, depth=toc_depth) }}
+        {% endif %}
+    </aside>
+</div>
+
+{# Mobile navigation toggle button #}
+<button class="docs-nav-mobile-toggle" id="docs-nav-mobile-toggle"
+        aria-label="Toggle navigation" aria-expanded="false"
+        aria-controls="docs-sidebar">
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+</button>
+{% endblock %}

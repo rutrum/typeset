@@ -57,6 +57,14 @@
   --page-padding: var(--spacing-lg);
 
   // --------------------------------------------------------------------------
+  // Documentation Layout
+  // --------------------------------------------------------------------------
+  --docs-nav-width: 240px;      // Left navigation sidebar width
+  --docs-content-width: 55ch;   // Narrower content to fit both sidebars
+  --docs-toc-width: 180px;      // Right TOC sidebar (slightly smaller than regular)
+  --docs-gap: var(--spacing-lg);// Gap between columns
+
+  // --------------------------------------------------------------------------
   // Borders & Radius
   // --------------------------------------------------------------------------
   --radius-sm: 3px;

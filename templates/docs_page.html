@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+
+{% block content %}
+{# Get the docs root section for navigation #}
+{% set docs_root_path = page.extra.docs_root | default(value="") %}
+{% if docs_root_path %}
+    {% set docs_root = get_section(path=docs_root_path, metadata_only=false) %}
+{% endif %}
+
+{% set show_toc = page.toc and config.extra.show_toc | default(value=true) %}
+{% set toc_depth = config.extra.toc_depth | default(value=3) %}
+
+<div class="docs-layout">
+    {# Left Navigation Sidebar #}
+    <aside class="docs-nav" id="docs-sidebar">
+        {% if docs_root %}
+        {{ macros::docs_nav(root=docs_root, current_path=page.path) }}
+        {% endif %}
+    </aside>
+
+    {# Main Content #}
+    <article class="docs-content">
+        <header class="docs-header">
+            <h1 class="docs-title">{{ page.title }}</h1>
+            {% if page.description %}
+            <p class="docs-description">{{ page.description }}</p>
+            {% endif %}
+        </header>
+
+        <div class="docs-body">
+            {{ page.content | safe }}
+        </div>
+
+        {# Previous/Next Navigation #}
+        {% if page.lower or page.higher %}
+        <footer class="docs-footer">
+            <nav class="docs-nav-footer" aria-label="Page navigation">
+                {% if page.higher %}
+                <a href="{{ page.higher.permalink }}" class="docs-nav-prev">
+                    <span class="docs-nav-label">&larr; Previous</span>
+                    <span class="docs-nav-page-title">{{ page.higher.title }}</span>
+                </a>
+                {% else %}
+                <span class="docs-nav-placeholder"></span>
+                {% endif %}
+
+                {% if page.lower %}
+                <a href="{{ page.lower.permalink }}" class="docs-nav-next">
+                    <span class="docs-nav-label">Next &rarr;</span>
+                    <span class="docs-nav-page-title">{{ page.lower.title }}</span>
+                </a>
+                {% endif %}
+            </nav>
+        </footer>
+        {% endif %}
+    </article>
+
+    {# Right TOC Sidebar #}
+    <aside class="docs-toc">
+        {% if show_toc %}
+        {{ macros::toc(toc=page.toc, depth=toc_depth) }}
+        {% endif %}
+    </aside>
+</div>
+
+{# Mobile navigation toggle button #}
+<button class="docs-nav-mobile-toggle" id="docs-nav-mobile-toggle"
+        aria-label="Toggle navigation" aria-expanded="false"
+        aria-controls="docs-sidebar">
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+</button>
+{% endblock %}

@@ -124,3 +124,78 @@
     {% endif %}
 </article>
 {% endmacro %}
+
+
+{# --------------------------------------------------------------------------
+   Documentation Navigation Sidebar
+
+   Renders hierarchical navigation for documentation sections.
+   Usage: {{ macros::docs_nav(root=docs_root, current_path=page.path) }}
+   -------------------------------------------------------------------------- #}
+
+{% macro docs_nav(root, current_path) %}
+<nav class="docs-sidebar-nav" aria-label="Documentation navigation">
+    <a href="{{ root.permalink }}" class="docs-nav-title">{{ root.title }}</a>
+    {{ self::docs_nav_tree(section=root, current_path=current_path, depth=0) }}
+</nav>
+{% endmacro %}
+
+{# --------------------------------------------------------------------------
+   Documentation Navigation Tree (Recursive)
+
+   Builds the nested navigation tree from sections and pages.
+   Pages and subsections are rendered together, sorted by weight.
+   -------------------------------------------------------------------------- #}
+
+{% macro docs_nav_tree(section, current_path, depth) %}
+{% set max_depth = 4 %}
+{% if depth < max_depth %}
+<ul class="docs-nav-list docs-nav-list--depth-{{ depth }}">
+    {# Build combined list of pages and subsections with their weights #}
+    {# First, render pages in this section #}
+    {% for page in section.pages %}
+    {% set is_current = page.path == current_path %}
+    <li class="docs-nav-item{% if is_current %} is-active{% endif %}" {% if page.extra.weight %}data-weight="{{ page.extra.weight }}"{% endif %}>
+        <a href="{{ page.permalink }}"
+           class="docs-nav-link{% if is_current %} is-current{% endif %}"
+           {% if is_current %}aria-current="page"{% endif %}>
+            {{ page.title }}
+        </a>
+    </li>
+    {% endfor %}
+
+    {# Then render subsections recursively #}
+    {% for subsection_path in section.subsections %}
+    {% set subsection = get_section(path=subsection_path, metadata_only=false) %}
+    {% set is_ancestor = current_path is starting_with(subsection.path) %}
+    {% set is_exact = subsection.path == current_path %}
+    {% set has_children = subsection.pages | length > 0 or subsection.subsections | length > 0 %}
+    <li class="docs-nav-item docs-nav-item--section{% if is_ancestor %} is-expanded{% endif %}{% if is_exact %} is-active{% endif %}{% if has_children %} has-children{% endif %}" {% if subsection.extra.weight %}data-weight="{{ subsection.extra.weight }}"{% endif %}>
+        {% if has_children %}
+        <div class="docs-nav-section-header">
+            <a href="{{ subsection.permalink }}"
+               class="docs-nav-link docs-nav-link--section{% if is_exact %} is-current{% endif %}"
+               {% if is_exact %}aria-current="page"{% endif %}>
+                {{ subsection.title }}
+            </a>
+            <button class="docs-nav-toggle"
+                    aria-expanded="{% if is_ancestor %}true{% else %}false{% endif %}"
+                    aria-label="Toggle {{ subsection.title }} section">
+                <span class="docs-nav-toggle-icon"></span>
+            </button>
+        </div>
+        <div class="docs-nav-children"{% if not is_ancestor %} hidden{% endif %}>
+            {{ self::docs_nav_tree(section=subsection, current_path=current_path, depth=depth + 1) }}
+        </div>
+        {% else %}
+        <a href="{{ subsection.permalink }}"
+           class="docs-nav-link docs-nav-link--section{% if is_exact %} is-current{% endif %}"
+           {% if is_exact %}aria-current="page"{% endif %}>
+            {{ subsection.title }}
+        </a>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endmacro %}

@@ -27,14 +27,31 @@ author = "Your Name"
 # Navigation links
 nav_links = [
     { name = "Blog", url = "/blog" },
+    { name = "Docs", url = "/docs" },
     { name = "About", url = "/about" },
 ]
 
-# Color customization (uncomment and modify to override defaults)
-# accent_color = "#b8860b"     # Academic gold
-# link_color = "#2563eb"       # Blue
-# background_color = "#fffff8" # Warm paper white
-# text_color = "#111111"       # Near black
+# ==========================================================================
+# Color Customization
+# ==========================================================================
+# Two main colors to customize:
+#   - accent_color: Highlights, active states, hover effects (default: gold)
+#   - link_color: Hyperlinks (default: blue)
+#
+# You can set separate colors for dark mode with _dark suffix.
+# If not set, light mode colors are used in both modes.
+
+# Light mode colors
+accent_color = "#b8860b"      # Academic gold - highlights, active nav items
+link_color = "#2563eb"        # Blue - hyperlinks
+
+# Dark mode colors (optional - defaults to light mode values if not set)
+# accent_color_dark = "#d4a84b"  # Brighter gold for dark backgrounds
+# link_color_dark = "#60a5fa"    # Lighter blue for dark backgrounds
+
+# Additional color overrides (optional)
+# background_color = "#fffff8"  # Page background
+# text_color = "#111111"        # Main text color
 
 # Typography customization (uncomment to use different fonts)
 # font_body = "'Libertinus Serif', Georgia, serif"

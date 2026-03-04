@@ -7,6 +7,7 @@
     Usage:
         {% spoiler(title="Click to reveal") %}
         Your hidden content here. **Markdown** is supported.
+        You can also nest other shortcodes like slideshow.
         {% end %}
 
     Parameters:
@@ -14,6 +15,13 @@
 
     The `nth` variable is automatically provided by Zola and increments for each
     shortcode invocation, ensuring unique IDs.
+
+    Note: Zola processes nested shortcodes BEFORE passing the body to this template,
+    so the body contains a mix of rendered HTML (from shortcodes) and raw markdown.
+    The markdown filter converts the remaining markdown while preserving the HTML.
+
+    Important: Nested shortcodes must NOT have indented output, otherwise the
+    markdown filter will treat the indented HTML as a code block.
 #}
 <div class="spoiler">
     <input type="checkbox" id="spoiler-{{ nth }}" class="spoiler-toggle" />

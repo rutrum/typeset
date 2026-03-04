@@ -1,7 +1,7 @@
 name = "typeset"
 description = "A LaTeX/typst-inspired academic paper theme for Zola blogs"
 license = "MIT"
-version = "0.1.0"
+version = "0.2.0"
 homepage = "https://github.com/rutrum/typeset"
 min_version = "0.18.0"
 demo = ""
@@ -11,12 +11,27 @@ name = "rutrum"
 homepage = "https://rutrum.net"
 
 [extra]
-# Color customization (CSS color values)
-# These override the default CSS variables
-accent_color = ""      # Default: #b8860b (academic gold)
-link_color = ""        # Default: #2563eb
-background_color = ""  # Default: #fffff8 (warm off-white)
-text_color = ""        # Default: #111
+# ==========================================================================
+# Color Customization
+# ==========================================================================
+# Two main colors define your theme's appearance:
+#   - accent_color: Used for highlights, active states, hover effects
+#   - link_color: Used for hyperlinks
+#
+# Add _dark suffix for dark mode variants (e.g., accent_color_dark)
+# If dark variants aren't set, light mode colors are used in both modes.
+
+# Light mode
+accent_color = ""           # Default: #b8860b (academic gold)
+link_color = ""             # Default: #2563eb (blue)
+
+# Dark mode (optional)
+accent_color_dark = ""      # Default: #d4a84b (brighter gold)
+link_color_dark = ""        # Default: #60a5fa (lighter blue)
+
+# Additional overrides
+background_color = ""       # Default: #fffff8 (warm off-white)
+text_color = ""             # Default: #111111 (near black)
 
 # Typography (Google Fonts names or font stacks)
 font_body = ""         # Default: "Crimson Pro", Georgia, serif
