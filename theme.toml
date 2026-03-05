@@ -1,7 +1,7 @@
 name = "typeset"
 description = "A LaTeX/typst-inspired academic paper theme for Zola blogs"
 license = "MIT"
-version = "0.2.0"
+version = "0.3.0"
 homepage = "https://github.com/rutrum/typeset"
 min_version = "0.18.0"
 demo = ""
@@ -58,9 +58,6 @@ nav_links = []
 # text = "Twitter"
 # url = "https://twitter.com/username"
 # icon = "twitter"
-
-# Site author (used in footer)
-author = ""
 
 # Taxonomies (copy to your config.toml)
 # taxonomies = [

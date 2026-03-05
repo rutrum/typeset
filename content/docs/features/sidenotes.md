@@ -1,9 +1,11 @@
 +++
-title = "The Art of Sidenotes"
-date = 2024-04-05
+title = "Sidenotes"
+template = "docs_page.html"
 description = "Using Tufte-style sidenotes and margin notes for supplementary content"
-[taxonomies]
-tags = ["typography", "design", "tufte"]
+weight = 5
+
+[extra]
+docs_root = "docs/_index.md"
 +++
 
 Edward Tufte popularized the use of sidenotes in his beautifully designed books on data visualization.{% sidenote() %}Edward Tufte is a statistician and professor emeritus at Yale University, known for his work on information design and data visualization.{% end %} Unlike footnotes, which interrupt reading flow by sending you to the bottom of the page, sidenotes appear in the margin right alongside the relevant text.
@@ -97,8 +99,18 @@ Notice how this margin note appears below the code block rather than beside it. 
 
 This behavior is intentional. Code and tabular data benefit from horizontal space more than prose does, and the slight displacement of sidenotes is a worthwhile trade-off.{% sidenote() %}If you need a sidenote to appear directly beside a code block, consider restructuring so the sidenote reference appears in the paragraph before or after the code.{% end %}
 
-## Conclusion
+## Syntax
 
-Sidenotes represent a thoughtful approach to supplementary content.{% sidenote() %}They're one of many typographic choices that distinguish carefully designed documents from hastily assembled ones.{% end %} By placing notes alongside the relevant text, they respect your readers' attention while still providing valuable context.
+Use the `sidenote` shortcode inline within your text:
 
-Try using sidenotes in your next article. Your readers will appreciate the improved flow.
+```
+Text with a sidenote.{%/* sidenote() */%}Content of the sidenote.{%/* end */%}
+```
+
+Use the `marginnote` shortcode for unnumbered margin notes:
+
+```
+{%/* marginnote() */%}
+Content of the margin note.
+{%/* end */%}
+```

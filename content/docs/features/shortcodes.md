@@ -1,9 +1,11 @@
 +++
-title = "Shortcodes Reference"
-date = 2024-06-01
+title = "Shortcodes"
+template = "docs_page.html"
 description = "Interactive elements: spoilers, slideshows, sidenotes, and margin notes"
-[taxonomies]
-tags = ["typography", "design"]
+weight = 7
+
+[extra]
+docs_root = "docs/_index.md"
 +++
 
 Typeset provides several shortcodes for adding interactive and supplementary content to your posts. This page demonstrates each one.
@@ -47,7 +49,13 @@ for i in range(1, 101):
 
 ### Syntax
 
-Use the `spoiler` shortcode with an optional `title` parameter. The content goes between the opening and closing tags.
+Use the `spoiler` shortcode with an optional `title` parameter. The content goes between the opening and closing tags:
+
+```
+{%/* spoiler(title="Click to reveal") */%}
+Hidden content here...
+{%/* end */%}
+```
 
 The `title` parameter is optional and defaults to "Spoiler" if not provided.
 
@@ -73,7 +81,23 @@ The images above show three famous statistical graphics:
 
 ### Syntax
 
-Use the `slideshow` shortcode with an `images` parameter containing an array of image paths.
+Use the `slideshow` shortcode with an `images` parameter containing an array of image paths:
+
+```
+{{/* slideshow(images=["/path/to/image1.png", "/path/to/image2.jpg"]) */}}
+```
+
+### Nested Inside Spoilers
+
+You can nest slideshows inside spoilers for optional viewing:
+
+{% spoiler(title="Click to reveal image gallery") %}
+
+{{ slideshow(images=["/wheel1.png", "/wheel2.png", "/wheel3.png"]) }}
+
+This is useful for hiding large content that readers may want to skip.
+
+{% end %}
 
 ---
 
@@ -90,7 +114,13 @@ They're ideal for:
 
 ### Syntax
 
-Use the `sidenote` shortcode inline within your text. The content appears in the margin on desktop and as a toggleable note on mobile.
+Use the `sidenote` shortcode inline within your text:
+
+```
+Text with a sidenote.{%/* sidenote() */%}Content of the sidenote.{%/* end */%}
+```
+
+The content appears in the margin on desktop and as a toggleable note on mobile.
 
 ---
 
@@ -109,7 +139,13 @@ Margin notes are similar to sidenotes but without numbers. They're useful for:
 
 ### Syntax
 
-Use the `marginnote` shortcode. Place it near the paragraph it relates to.
+Use the `marginnote` shortcode. Place it near the paragraph it relates to:
+
+```
+{%/* marginnote() */%}
+Content of the margin note.
+{%/* end */%}
+```
 
 ---
 

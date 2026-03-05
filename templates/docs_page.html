@@ -36,22 +36,20 @@
 
         {# Previous/Next Navigation #}
         {% if page.lower or page.higher %}
-        <footer class="docs-footer">
-            <nav class="docs-nav-footer" aria-label="Page navigation">
+        <footer class="article-footer">
+            <nav class="post-nav" aria-label="Page navigation">
                 {% if page.higher %}
-                <a href="{{ page.higher.permalink }}" class="docs-nav-prev">
-                    <span class="docs-nav-label">&larr; Previous</span>
-                    <span class="docs-nav-page-title">{{ page.higher.title }}</span>
-                </a>
-                {% else %}
-                <span class="docs-nav-placeholder"></span>
+                <div class="post-nav-link post-nav-link--prev">
+                    <span class="post-nav-label">&larr; Previous</span>
+                    <a href="{{ page.higher.permalink }}">{{ page.higher.title }}</a>
+                </div>
                 {% endif %}
 
                 {% if page.lower %}
-                <a href="{{ page.lower.permalink }}" class="docs-nav-next">
-                    <span class="docs-nav-label">Next &rarr;</span>
-                    <span class="docs-nav-page-title">{{ page.lower.title }}</span>
-                </a>
+                <div class="post-nav-link post-nav-link--next">
+                    <span class="post-nav-label">Next &rarr;</span>
+                    <a href="{{ page.lower.permalink }}">{{ page.lower.title }}</a>
+                </div>
                 {% endif %}
             </nav>
         </footer>

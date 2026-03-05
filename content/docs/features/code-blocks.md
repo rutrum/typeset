@@ -1,9 +1,11 @@
 +++
-title = "Code Blocks and Syntax Highlighting"
-date = 2024-05-12
+title = "Code Blocks"
+template = "docs_page.html"
 description = "Displaying code with beautiful syntax highlighting"
-[taxonomies]
-tags = ["code", "programming", "tutorial"]
+weight = 6
+
+[extra]
+docs_root = "docs/_index.md"
 +++
 
 Technical writing often requires displaying code. This theme provides syntax highlighting for dozens of programming languages, making your code examples clear and readable.

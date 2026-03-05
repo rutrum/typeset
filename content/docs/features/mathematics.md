@@ -1,10 +1,11 @@
 +++
-title = "Mathematical Typography with KaTeX"
-date = 2024-03-10
+title = "Mathematics"
+template = "docs_page.html"
 description = "Rendering beautiful mathematical equations using KaTeX"
-[taxonomies]
-tags = ["math", "typography", "latex"]
+weight = 4
+
 [extra]
+docs_root = "docs/_index.md"
 math = true
 +++
 
@@ -136,6 +137,11 @@ x & \text{if } x \geq 0 \\\\
 \end{cases}
 $$
 
-## Conclusion
+## Enabling Math
 
-With KaTeX, your mathematical content renders quickly and beautifully. Just add `math = true` to your page's frontmatter to enable it.
+To enable KaTeX rendering on a page, add `math = true` to your page's frontmatter:
+
+```toml
+[extra]
+math = true
+```

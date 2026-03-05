@@ -1,9 +1,11 @@
 +++
-title = "Working with Tables"
-date = 2024-02-25
+title = "Tables"
+template = "docs_page.html"
 description = "From simple data tables to large scrollable datasets with expand functionality"
-[taxonomies]
-tags = ["markdown", "data", "tutorial"]
+weight = 3
+
+[extra]
+docs_root = "docs/_index.md"
 +++
 
 Tables are excellent for comparing data across categories. Markdown tables are simple to write and can handle a variety of use cases.

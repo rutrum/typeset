@@ -1,9 +1,11 @@
 +++
-title = "Organizing Content with Lists"
-date = 2024-02-20
+title = "Lists"
+template = "docs_page.html"
 description = "How to present structured information using various markdown list types"
-[taxonomies]
-tags = ["markdown", "tutorial"]
+weight = 2
+
+[extra]
+docs_root = "docs/_index.md"
 +++
 
 When you need to present structured information, markdown offers several powerful list types: unordered, ordered, task lists, and definition lists.

@@ -164,9 +164,15 @@
     </li>
     {% endfor %}
 
-    {# Then render subsections recursively #}
+    {# Build list of subsections with their data for sorting #}
+    {% set subsections_data = [] %}
     {% for subsection_path in section.subsections %}
-    {% set subsection = get_section(path=subsection_path, metadata_only=false) %}
+        {% set subsection = get_section(path=subsection_path, metadata_only=false) %}
+        {% set_global subsections_data = subsections_data | concat(with=[subsection]) %}
+    {% endfor %}
+
+    {# Sort subsections by weight and render recursively #}
+    {% for subsection in subsections_data | sort(attribute="extra.weight") %}
     {% set is_ancestor = current_path is starting_with(subsection.path) %}
     {% set is_exact = subsection.path == current_path %}
     {% set has_children = subsection.pages | length > 0 or subsection.subsections | length > 0 %}

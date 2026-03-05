@@ -161,10 +161,11 @@
 }
 
 // --------------------------------------------------------------------------
-// Extended Width for Tables in Articles
+// Extended Width for Tables in Articles and Docs
 // --------------------------------------------------------------------------
 
-.article-content {
+.article-content,
+.docs-body {
   .table-wrapper,
   .table-expandable {
     width: calc(100% + var(--content-extend));

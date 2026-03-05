@@ -21,9 +21,6 @@ light_theme = "catppuccin-latte"
 dark_theme = "catppuccin-frappe"
 
 [extra]
-# Author name (displayed in footer)
-author = "Your Name"
-
 # Navigation links
 nav_links = [
     { name = "Blog", url = "/blog" },

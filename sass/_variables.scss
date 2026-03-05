@@ -60,7 +60,8 @@
   // Documentation Layout
   // --------------------------------------------------------------------------
   --docs-nav-width: 240px;      // Left navigation sidebar width
-  --docs-content-width: 55ch;   // Narrower content to fit both sidebars
+  --docs-content-width: 65ch;   // Match blog content width
+  --docs-sidenote-width: 200px; // Sidenote column (narrower than regular 250px)
   --docs-toc-width: 180px;      // Right TOC sidebar (slightly smaller than regular)
   --docs-gap: var(--spacing-lg);// Gap between columns
 

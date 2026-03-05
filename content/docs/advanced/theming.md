@@ -2,7 +2,7 @@
 title = "Theming"
 template = "docs_page.html"
 description = "Creating custom themes and styles"
-weight = 2
+weight = 1
 
 [extra]
 docs_root = "docs/_index.md"

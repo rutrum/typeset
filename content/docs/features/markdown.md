@@ -1,9 +1,11 @@
 +++
-title = "Writing with Markdown"
-date = 2024-01-15
+title = "Markdown Basics"
+template = "docs_page.html"
 description = "A guide to basic markdown formatting for clear, readable content"
-[taxonomies]
-tags = ["markdown", "writing", "tutorial"]
+weight = 1
+
+[extra]
+docs_root = "docs/_index.md"
 +++
 
 Markdown is the foundation of content on the web. It lets you write formatted text using plain characters, making it easy to read even in its raw form.

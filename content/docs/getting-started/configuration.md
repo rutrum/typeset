@@ -33,9 +33,6 @@ nav_links = [
     { name = "About", url = "/about" },
 ]
 
-# Author name for footer
-author = "Your Name"
-
 # Show table of contents on pages
 show_toc = true
 toc_depth = 3

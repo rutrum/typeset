@@ -20,7 +20,8 @@
   }
 
   // Disable extended width for code/tables (no sidenote margin available)
-  .article-content {
+  .article-content,
+  .docs-body {
     pre,
     > table,
     .table-wrapper,
@@ -154,6 +155,59 @@
 // ==========================================================================
 // Documentation Layout Responsive
 // ==========================================================================
+
+// --------------------------------------------------------------------------
+// Docs: Sidenotes collapse (1100px - 1200px): Three-column, sidenotes inline
+// --------------------------------------------------------------------------
+
+@media (max-width: 1200px) {
+  // Revert to 3-column layout (drop sidenote column)
+  .docs-layout {
+    grid-template-columns: var(--docs-nav-width) 1fr var(--docs-toc-width);
+  }
+
+  .docs-toc {
+    grid-column: 3;
+  }
+
+  // Disable extended width for code/tables (no sidenote margin available)
+  .docs-body {
+    pre,
+    > table,
+    .table-wrapper,
+    .table-expandable {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  // Sidenotes collapse to inline toggleable notes
+  .docs-content {
+    .sidenote,
+    .marginnote {
+      float: none;
+      display: none;
+      width: 100%;
+      margin: var(--spacing-md) 0;
+      margin-right: 0;
+      padding: var(--spacing-sm) var(--spacing-md);
+      background-color: var(--color-surface);
+      border-left: 3px solid var(--color-accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+  }
+
+  // Show marginnote toggle symbol in docs
+  .docs-content .marginnote-symbol {
+    display: inline;
+  }
+
+  // Toggle visibility when checkbox is checked
+  .docs-content .margin-toggle:checked + .sidenote,
+  .docs-content .margin-toggle:checked + .marginnote {
+    display: block;
+  }
+}
 
 // --------------------------------------------------------------------------
 // Large Tablet (900px - 1100px): Two-column, TOC moves inline

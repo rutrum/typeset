@@ -203,8 +203,9 @@ pre {
   }
 }
 
-// Extend code blocks into sidenote margin (within articles)
-.article-content pre {
+// Extend code blocks into sidenote margin (within articles and docs)
+.article-content pre,
+.docs-body pre {
   width: calc(100% + var(--content-extend));
   max-width: calc(100% + var(--content-extend));
   clear: right; // Push floating sidenotes down
@@ -230,8 +231,9 @@ table {
   font-size: var(--font-size-sm);
 }
 
-// Extend tables into sidenote margin (within articles)
-.article-content > table {
+// Extend tables into sidenote margin (within articles and docs)
+.article-content > table,
+.docs-body > table {
   width: calc(100% + var(--content-extend));
   max-width: calc(100% + var(--content-extend));
   clear: right; // Push floating sidenotes down
