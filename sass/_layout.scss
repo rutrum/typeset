@@ -68,6 +68,10 @@
   display: block;
   max-width: calc(var(--content-width) + var(--sidenote-width) + var(--spacing-xl));
   margin: 0 auto;
+
+  .page-content {
+    max-width: var(--content-width);
+  }
 }
 
 // --------------------------------------------------------------------------
@@ -84,7 +88,7 @@
 // --------------------------------------------------------------------------
 
 .page-content {
-  counter-reset: sidenote-counter;
+  counter-reset: sidenote-counter figure-counter;
 }
 
 .article-header {

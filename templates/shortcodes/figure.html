@@ -1,0 +1,4 @@
+<figure id="{{ id | default(value='fig-' ~ nth) }}" class="numbered-figure">
+<img src="{{ src }}" alt="{{ alt | default(value=caption | default(value='')) }}" />
+{% if caption %}<figcaption><span class="figure-number"></span>{{ caption | markdown(inline=true) | safe }}</figcaption>{% endif %}
+</figure>

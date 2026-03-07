@@ -185,7 +185,7 @@
   grid-column: 2;
   min-width: 0; // Prevent grid blowout
   position: relative;
-  counter-reset: sidenote-counter;
+  counter-reset: sidenote-counter figure-counter;
 }
 
 .docs-header {

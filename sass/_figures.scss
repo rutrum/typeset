@@ -1,0 +1,41 @@
+// ==========================================================================
+// Figures with Automatic Numbering
+// ==========================================================================
+// Academic-style figures with captions and CSS counter-based numbering.
+// Counter is reset in _layout.scss and _docs.scss alongside sidenote-counter.
+
+.numbered-figure {
+  counter-increment: figure-counter;
+  margin: var(--spacing-lg) 0;
+  clear: right; // Push floating sidenotes down
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  figcaption {
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-base);
+  }
+
+  .figure-number::before {
+    content: "Figure " counter(figure-counter) ". ";
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Extended Width for Figures
+// --------------------------------------------------------------------------
+// Extend figures into sidenote margin (like code blocks and tables)
+
+.article-content .numbered-figure,
+.docs-body .numbered-figure {
+  width: calc(100% + var(--content-extend));
+  max-width: calc(100% + var(--content-extend));
+}

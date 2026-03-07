@@ -19,13 +19,14 @@
     margin: 0 auto;
   }
 
-  // Disable extended width for code/tables (no sidenote margin available)
+  // Disable extended width for code/tables/figures (no sidenote margin available)
   .article-content,
   .docs-body {
     pre,
     > table,
     .table-wrapper,
-    .table-expandable {
+    .table-expandable,
+    .numbered-figure {
       width: 100%;
       max-width: 100%;
     }
@@ -170,12 +171,13 @@
     grid-column: 3;
   }
 
-  // Disable extended width for code/tables (no sidenote margin available)
+  // Disable extended width for code/tables/figures (no sidenote margin available)
   .docs-body {
     pre,
     > table,
     .table-wrapper,
-    .table-expandable {
+    .table-expandable,
+    .numbered-figure {
       width: 100%;
       max-width: 100%;
     }
