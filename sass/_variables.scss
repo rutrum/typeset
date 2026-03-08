@@ -50,7 +50,7 @@
   // Layout
   // --------------------------------------------------------------------------
   --content-width: 65ch;        // Optimal reading width
-  --content-extend: 13ch;       // How much code/tables extend into sidenote margin (~20%)
+  --content-extend: 7ch;        // How much code/tables extend each side (centered, 14ch total)
   --sidenote-width: 250px;      // Right margin for sidenotes
   --toc-width: 200px;           // Left sidebar for TOC
   --page-max-width: 1400px;     // Max container width

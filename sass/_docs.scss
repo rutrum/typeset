@@ -12,10 +12,11 @@
   display: grid;
   grid-template-columns:
     var(--docs-nav-width)
+    var(--content-extend)
     minmax(0, var(--docs-content-width))
     var(--docs-sidenote-width)
     var(--docs-toc-width);
-  gap: var(--docs-gap);
+  gap: var(--docs-gap) 0; // Row gap only, columns handle their own spacing
   max-width: var(--page-max-width);
   margin: 0 auto;
   align-items: start;
@@ -182,7 +183,7 @@
 // --------------------------------------------------------------------------
 
 .docs-content {
-  grid-column: 2;
+  grid-column: 3; // Column 2 is the left extension gap
   min-width: 0; // Prevent grid blowout
   position: relative;
   counter-reset: sidenote-counter figure-counter;
@@ -273,7 +274,7 @@
 // --------------------------------------------------------------------------
 
 .docs-toc {
-  grid-column: 4;
+  grid-column: 5; // After nav, gap, content, sidenotes
   position: sticky;
   top: var(--spacing-lg);
   max-height: calc(100vh - var(--spacing-xl));

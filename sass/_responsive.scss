@@ -26,9 +26,11 @@
     > table,
     .table-wrapper,
     .table-expandable,
-    .numbered-figure {
+    .numbered-figure.wide {
       width: 100%;
       max-width: 100%;
+      margin-left: 0;
+      margin-right: 0;
     }
   }
 
@@ -177,9 +179,11 @@
     > table,
     .table-wrapper,
     .table-expandable,
-    .numbered-figure {
+    .numbered-figure.wide {
       width: 100%;
       max-width: 100%;
+      margin-left: 0;
+      margin-right: 0;
     }
   }
 

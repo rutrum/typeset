@@ -7,7 +7,7 @@
 .numbered-figure {
   counter-increment: figure-counter;
   margin: var(--spacing-lg) 0;
-  clear: right; // Push floating sidenotes down
+  clear: both; // Push floating sidenotes down on both sides
 
   img {
     display: block;
@@ -30,12 +30,14 @@
 }
 
 // --------------------------------------------------------------------------
-// Extended Width for Figures
+// Wide Figures (opt-in)
 // --------------------------------------------------------------------------
-// Extend figures into sidenote margin (like code blocks and tables)
+// Figures are normal width by default. Use wide=true in shortcode to extend.
 
-.article-content .numbered-figure,
-.docs-body .numbered-figure {
-  width: calc(100% + var(--content-extend));
-  max-width: calc(100% + var(--content-extend));
+.article-content .numbered-figure.wide,
+.docs-body .numbered-figure.wide {
+  width: calc(100% + var(--content-extend) * 2);
+  max-width: calc(100% + var(--content-extend) * 2);
+  margin-left: calc(-1 * var(--content-extend));
+  margin-right: calc(-1 * var(--content-extend));
 }

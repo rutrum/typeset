@@ -1,7 +1,7 @@
 name = "typeset"
 description = "A LaTeX/typst-inspired academic paper theme for Zola blogs"
 license = "MIT"
-version = "0.3.0"
+version = "0.4.0"
 homepage = "https://github.com/rutrum/typeset"
 min_version = "0.18.0"
 demo = ""

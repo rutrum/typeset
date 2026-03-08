@@ -161,15 +161,17 @@
 }
 
 // --------------------------------------------------------------------------
-// Extended Width for Tables in Articles and Docs
+// Extended Width for Tables in Articles and Docs (centered)
 // --------------------------------------------------------------------------
 
 .article-content,
 .docs-body {
   .table-wrapper,
   .table-expandable {
-    width: calc(100% + var(--content-extend));
-    max-width: calc(100% + var(--content-extend));
-    clear: right; // Push floating sidenotes down
+    width: calc(100% + var(--content-extend) * 2);
+    max-width: calc(100% + var(--content-extend) * 2);
+    margin-left: calc(-1 * var(--content-extend));
+    margin-right: calc(-1 * var(--content-extend));
+    clear: both; // Push floating sidenotes down on both sides
   }
 }

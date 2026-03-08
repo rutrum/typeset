@@ -42,6 +42,7 @@ The figure shortcode accepts these parameters:
 | `caption` | No | Caption text (supports inline markdown) |
 | `alt` | No | Alt text for accessibility (defaults to caption) |
 | `id` | No | Custom ID for cross-references (defaults to `fig-{n}`) |
+| `wide` | No | Set to `true` to extend figure into margins (centered) |
 
 ## Custom IDs for Cross-References
 
@@ -63,8 +64,18 @@ Captions support inline markdown formatting:
 
 You can use *italics*, **bold**, and even inline math in your captions.
 
+## Wide Figures
+
+By default, figures stay within the content column. For larger images like panoramas or detailed diagrams, use the `wide` parameter to extend them into the margins:
+
+```jinja2
+{{/* figure(src="/images/minard.png", caption="A wide panoramic visualization", wide=true) */}}
+```
+
+{{ figure(src="/images/minard.png", caption="Minard's map extends into the margins when using `wide=true`", wide=true) }}
+
+Wide figures extend equally on both sides (centered), giving large images more room to breathe while maintaining visual balance.
+
 ## Layout Behavior
 
-Figures extend slightly into the sidenote margin on wide screens, giving images more room to breathe. On narrower viewports, they shrink to fit the content column.
-
-Figures also push any floating sidenotes down to prevent overlap, similar to how code blocks and tables behave.
+Figures push any floating sidenotes down to prevent overlap, similar to how code blocks and tables behave. On narrower viewports, wide figures automatically shrink to fit the content column.

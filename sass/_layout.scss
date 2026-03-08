@@ -37,8 +37,8 @@
 
 .page-layout {
   display: grid;
-  grid-template-columns: var(--toc-width) minmax(0, var(--content-width)) 1fr;
-  gap: var(--spacing-xl);
+  grid-template-columns: var(--toc-width) var(--content-extend) minmax(0, var(--content-width)) 1fr;
+  gap: var(--spacing-xl) 0; // Row gap only, columns handle their own spacing
   max-width: var(--page-max-width);
   margin: 0 auto;
   align-items: start;
@@ -53,7 +53,7 @@
 }
 
 .page-content {
-  grid-column: 2;
+  grid-column: 3; // Column 2 is the left extension gap
   min-width: 0; // Prevent grid blowout
 }
 
