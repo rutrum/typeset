@@ -20,17 +20,19 @@
   }
 
   // Disable extended width for code/tables/figures (no sidenote margin available)
-  .article-content,
-  .docs-body {
-    pre,
-    > table,
-    .table-wrapper,
-    .table-expandable,
-    .numbered-figure.wide {
-      width: 100%;
-      max-width: 100%;
-      margin-left: 0;
-      margin-right: 0;
+  // Only applies to tablet (769px - 1100px); mobile has full-bleed styles
+  @media (min-width: 769px) {
+    .prose-content {
+      pre,
+      > table,
+      .table-wrapper,
+      .table-expandable,
+      .numbered-figure.wide {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+      }
     }
   }
 
@@ -97,6 +99,55 @@
     --font-size-base: 1rem; // Slightly smaller on mobile
   }
 
+  // --------------------------------------------------------------------------
+  // Full-bleed elements on mobile
+  // --------------------------------------------------------------------------
+  // Figures, code blocks, and tables break out of content padding to span
+  // full viewport width for better use of limited screen space.
+
+  .prose-content {
+    // Code blocks - full bleed
+    pre {
+      width: calc(100% + var(--page-padding) * 2);
+      max-width: none;
+      margin-left: calc(-1 * var(--page-padding));
+      margin-right: calc(-1 * var(--page-padding));
+      border-radius: 0;
+    }
+
+    // Figures - full bleed (including wide variants)
+    .numbered-figure,
+    .numbered-figure.wide {
+      width: calc(100% + var(--page-padding) * 2);
+      max-width: none;
+      margin-left: calc(-1 * var(--page-padding));
+      margin-right: calc(-1 * var(--page-padding));
+
+      img {
+        width: 100%;
+        max-width: none;
+      }
+
+      // Keep caption readable with padding
+      figcaption {
+        padding-left: var(--page-padding);
+        padding-right: var(--page-padding);
+      }
+    }
+
+    // Tables - full bleed
+    .table-wrapper,
+    .table-expandable {
+      width: calc(100% + var(--page-padding) * 2);
+      max-width: none;
+      margin-left: calc(-1 * var(--page-padding));
+      margin-right: calc(-1 * var(--page-padding));
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
+  }
+
   // Stack header vertically
   .site-header .header-inner {
     flex-direction: column;
@@ -108,6 +159,34 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: var(--spacing-md);
+  }
+
+  // On docs pages: hamburger on left, title centered, nav on right
+  .is-docs-page .site-header .header-inner {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+  }
+
+  // Position hamburger absolutely on the left
+  .is-docs-page .docs-nav-toggle-header {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  // Center the site title
+  .is-docs-page .site-title {
+    flex: 0 0 auto;
+  }
+
+  // Nav links wrap to second row, centered
+  .is-docs-page .header-right {
+    flex: 0 0 100%;
+    justify-content: center;
   }
 
   // Reduce heading sizes
@@ -174,16 +253,19 @@
   }
 
   // Disable extended width for code/tables/figures (no sidenote margin available)
-  .docs-body {
-    pre,
-    > table,
-    .table-wrapper,
-    .table-expandable,
-    .numbered-figure.wide {
-      width: 100%;
-      max-width: 100%;
-      margin-left: 0;
-      margin-right: 0;
+  // Only for tablet (769px-1200px); mobile has full-bleed styles
+  @media (min-width: 769px) {
+    .prose-content {
+      pre,
+      > table,
+      .table-wrapper,
+      .table-expandable,
+      .numbered-figure.wide {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+      }
     }
   }
 
@@ -249,8 +331,8 @@
 // --------------------------------------------------------------------------
 
 @media (max-width: 900px) {
-  // Show mobile toggle button
-  .docs-nav-mobile-toggle {
+  // Show hamburger in header on docs pages
+  .is-docs-page .docs-nav-toggle-header {
     display: flex;
   }
 
@@ -260,6 +342,9 @@
     top: 0;
     left: 0;
     bottom: 0;
+    height: 100vh;
+    height: 100dvh; // Dynamic viewport height for mobile browsers
+    max-height: none; // Override desktop max-height
     width: var(--docs-nav-width);
     max-width: 85vw;
     z-index: 100;
@@ -321,11 +406,6 @@
     width: 85vw;
     max-width: 300px;
   }
-
-  .docs-nav-mobile-toggle {
-    bottom: var(--spacing-md);
-    left: var(--spacing-md);
-  }
 }
 
 // Body class when docs nav is open (prevents scrolling)
@@ -358,7 +438,7 @@ body.docs-nav-open .docs-nav-overlay {
   .pagination,
   .docs-nav,
   .docs-toc,
-  .docs-nav-mobile-toggle {
+  .docs-nav-toggle-header {
     display: none;
   }
 

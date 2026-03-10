@@ -355,6 +355,35 @@
 }
 
 // --------------------------------------------------------------------------
+// Header Hamburger Toggle (for docs mobile nav)
+// --------------------------------------------------------------------------
+
+.docs-nav-toggle-header {
+  display: none; // Hidden by default, shown on docs pages at mobile widths
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text);
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-accent);
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  svg {
+    display: block;
+  }
+}
+
+// --------------------------------------------------------------------------
 // Dark Mode Adjustments
 // --------------------------------------------------------------------------
 

@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% import "macros.html" as macros %}
 
+{% block body_class %}is-docs-page{% endblock %}
+
 {% block title %}{{ section.title }} | {{ config.title }}{% endblock %}
 
 {% block content %}
@@ -32,7 +34,7 @@
         </header>
 
         {% if section.content %}
-        <div class="docs-body">
+        <div class="docs-body prose-content">
             {{ section.content | safe }}
         </div>
         {% endif %}
@@ -80,13 +82,4 @@
         {% endif %}
     </aside>
 </div>
-
-{# Mobile navigation toggle button #}
-<button class="docs-nav-mobile-toggle" id="docs-nav-mobile-toggle"
-        aria-label="Toggle navigation" aria-expanded="false"
-        aria-controls="docs-sidebar">
-    <span class="hamburger-line"></span>
-    <span class="hamburger-line"></span>
-    <span class="hamburger-line"></span>
-</button>
 {% endblock %}

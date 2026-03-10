@@ -161,17 +161,19 @@
 }
 
 // --------------------------------------------------------------------------
-// Extended Width for Tables in Articles and Docs (centered)
+// Extended Width for Wrapped Tables (centered)
 // --------------------------------------------------------------------------
+// Only on desktop (>1100px); tablet and mobile have their own styles
 
-.article-content,
-.docs-body {
-  .table-wrapper,
-  .table-expandable {
-    width: calc(100% + var(--content-extend) * 2);
-    max-width: calc(100% + var(--content-extend) * 2);
-    margin-left: calc(-1 * var(--content-extend));
-    margin-right: calc(-1 * var(--content-extend));
-    clear: both; // Push floating sidenotes down on both sides
+@media (min-width: 1101px) {
+  .prose-content {
+    .table-wrapper,
+    .table-expandable {
+      width: calc(100% + var(--content-extend) * 2);
+      max-width: calc(100% + var(--content-extend) * 2);
+      margin-left: calc(-1 * var(--content-extend));
+      margin-right: calc(-1 * var(--content-extend));
+      clear: both; // Push floating sidenotes down on both sides
+    }
   }
 }

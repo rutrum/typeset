@@ -203,14 +203,16 @@ pre {
   }
 }
 
-// Extend code blocks into margins (centered, within articles and docs)
-.article-content pre,
-.docs-body pre {
-  width: calc(100% + var(--content-extend) * 2);
-  max-width: calc(100% + var(--content-extend) * 2);
-  margin-left: calc(-1 * var(--content-extend));
-  margin-right: calc(-1 * var(--content-extend));
-  clear: both; // Push floating sidenotes down on both sides
+// Extend code blocks into margins (centered)
+// Only on desktop (>1100px); tablet and mobile have their own styles
+@media (min-width: 1101px) {
+  .prose-content pre {
+    width: calc(100% + var(--content-extend) * 2);
+    max-width: calc(100% + var(--content-extend) * 2);
+    margin-left: calc(-1 * var(--content-extend));
+    margin-right: calc(-1 * var(--content-extend));
+    clear: both; // Push floating sidenotes down on both sides
+  }
 }
 
 // --------------------------------------------------------------------------
@@ -233,14 +235,16 @@ table {
   font-size: var(--font-size-sm);
 }
 
-// Extend tables into margins (centered, within articles and docs)
-.article-content > table,
-.docs-body > table {
-  width: calc(100% + var(--content-extend) * 2);
-  max-width: calc(100% + var(--content-extend) * 2);
-  margin-left: calc(-1 * var(--content-extend));
-  margin-right: calc(-1 * var(--content-extend));
-  clear: both; // Push floating sidenotes down on both sides
+// Extend tables into margins (centered)
+// Only on desktop (>1100px); tablet and mobile have their own styles
+@media (min-width: 1101px) {
+  .prose-content > table {
+    width: calc(100% + var(--content-extend) * 2);
+    max-width: calc(100% + var(--content-extend) * 2);
+    margin-left: calc(-1 * var(--content-extend));
+    margin-right: calc(-1 * var(--content-extend));
+    clear: both; // Push floating sidenotes down on both sides
+  }
 }
 
 th,

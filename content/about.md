@@ -1,46 +1,34 @@
 +++
 title = "About"
-description = "Learn more about this site and its author"
+description = "A Zola theme inspired by LaTeX and Typst"
 template = "page.html"
 +++
 
-Welcome! This site is powered by **Typeset**, a Zola theme inspired by the clean typography of LaTeX and academic papers.
+**Typeset** is a Zola theme for writers who appreciate clean typography and academic aesthetics. It draws inspiration from LaTeX, Typst, and the principles of well-typeset documents.
 
-## About This Theme
+## Features
 
-Typeset brings the aesthetic of well-typeset documents to the web. It features:
+- **Tufte-style sidenotes** keep supplementary content visible without interrupting reading flow
+- **KaTeX math rendering** for beautiful equations, loaded only when needed
+- **Academic figure numbering** with captions and cross-references
+- **Responsive design** that adapts from desktop to mobile with full-bleed images and code
+- **Dark mode** via system preferences or manual toggle
+- **Syntax highlighting** with Catppuccin themes
 
-- **Academic typography** with carefully chosen fonts (Crimson Pro for body text, Inter for headings)
-- **Tufte-style sidenotes** that keep supplementary content visible without interrupting reading flow
-- **KaTeX math rendering** for beautiful mathematical equations
-- **Responsive design** that adapts gracefully from desktop to mobile
-- **Dark mode support** via system preferences
+## Typography
 
-## Philosophy
+Good typography serves the reader. Typeset uses:
 
-Good typography serves the reader. Every design choice in this theme aims to make content more readable and accessible:
+- **Crimson Pro** for body text, a serif designed for comfortable reading
+- **EB Garamond** for headings, inspired by classic book typography
+- **JetBrains Mono** for code, with ligatures and clear character distinction
+- **65-character line width** to reduce eye strain
+- **Generous whitespace** to let content breathe
 
-- **Optimal line length** (around 65 characters) reduces eye strain
-- **Generous whitespace** gives content room to breathe
-- **Hierarchical headings** help readers navigate
-- **Sidenotes over footnotes** keep context visible
+## Getting Started
 
-## Technical Details
+See the [documentation](/docs/) for installation and configuration instructions.
 
-This theme is built with:
+## Source
 
-- [Zola](https://www.getzola.org/) — A fast static site generator written in Rust
-- [Sass](https://sass-lang.com/) — CSS with superpowers
-- [KaTeX](https://katex.org/) — Fast math typesetting (loaded only when needed)
-- CSS custom properties for easy theming
-
-## Contact
-
-Feel free to reach out:
-
-- Email: [hello@example.com](mailto:hello@example.com)
-- GitHub: [@username](https://github.com/username)
-
----
-
-*This about page is part of the Typeset theme demo content.*
+Typeset is open source and available on [GitHub](https://github.com/rutrum/typeset).

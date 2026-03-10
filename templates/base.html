@@ -87,7 +87,7 @@
         })();
     </script>
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
     <div class="site-container">
         <header class="site-header">
             {% block header %}
@@ -95,6 +95,16 @@
                 <a href="{{ config.base_url }}" class="site-title">{{ config.title }}</a>
 
                 <div class="header-right">
+                    {# Docs nav hamburger - only visible on docs pages at mobile widths #}
+                    <button class="docs-nav-toggle-header" id="docs-nav-mobile-toggle"
+                            aria-label="Toggle documentation navigation" aria-expanded="false"
+                            aria-controls="docs-sidebar">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
                     {% if config.extra.nav_links %}
                     <nav>
                         <ul class="nav-links">
