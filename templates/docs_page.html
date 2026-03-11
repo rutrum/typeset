@@ -10,6 +10,12 @@
 {% set docs_root_path = page.extra.docs_root | default(value="") %}
 {% if docs_root_path %}
     {% set docs_root = get_section(path=docs_root_path, metadata_only=false) %}
+{% else %}
+    {# If no docs_root specified, try to use parent section #}
+    {% set docs_root = page.ancestors | last | default(value="") %}
+    {% if docs_root %}
+        {% set docs_root = get_section(path=docs_root, metadata_only=false) %}
+    {% endif %}
 {% endif %}
 
 {% set show_toc = page.toc and config.extra.show_toc | default(value=true) %}

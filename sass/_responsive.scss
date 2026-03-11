@@ -8,6 +8,39 @@
 // - Mobile:  < 768px (single column)
 
 // --------------------------------------------------------------------------
+// Shared Mixins
+// --------------------------------------------------------------------------
+
+// Reset extended width for tablet (no sidenote margin available)
+@mixin tablet-content-reset {
+  .prose-content {
+    pre,
+    > table,
+    .table-wrapper,
+    .table-expandable,
+    .numbered-figure.wide {
+      width: 100%;
+      max-width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}
+
+// Collapse sidenotes to toggleable inline notes
+@mixin sidenotes-collapsed {
+  float: none;
+  display: none;
+  width: 100%;
+  margin: var(--spacing-md) 0;
+  margin-right: 0;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-surface);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+// --------------------------------------------------------------------------
 // Tablet & Below (Sidenotes Collapse)
 // --------------------------------------------------------------------------
 
@@ -22,18 +55,7 @@
   // Disable extended width for code/tables/figures (no sidenote margin available)
   // Only applies to tablet (769px - 1100px); mobile has full-bleed styles
   @media (min-width: 769px) {
-    .prose-content {
-      pre,
-      > table,
-      .table-wrapper,
-      .table-expandable,
-      .numbered-figure.wide {
-        width: 100%;
-        max-width: 100%;
-        margin-left: 0;
-        margin-right: 0;
-      }
-    }
+    @include tablet-content-reset;
   }
 
   // TOC moves inline above content
@@ -52,15 +74,7 @@
   // Sidenotes collapse to toggleable inline notes
   .sidenote,
   .marginnote {
-    float: none;
-    display: none;
-    width: 100%;
-    margin: var(--spacing-md) 0;
-    margin-right: 0;
-    padding: var(--spacing-sm) var(--spacing-md);
-    background-color: var(--color-surface);
-    border-left: 3px solid var(--color-accent);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    @include sidenotes-collapsed;
   }
 
   // Show toggle indicator for sidenotes
@@ -255,33 +269,14 @@
   // Disable extended width for code/tables/figures (no sidenote margin available)
   // Only for tablet (769px-1200px); mobile has full-bleed styles
   @media (min-width: 769px) {
-    .prose-content {
-      pre,
-      > table,
-      .table-wrapper,
-      .table-expandable,
-      .numbered-figure.wide {
-        width: 100%;
-        max-width: 100%;
-        margin-left: 0;
-        margin-right: 0;
-      }
-    }
+    @include tablet-content-reset;
   }
 
   // Sidenotes collapse to inline toggleable notes
   .docs-content {
     .sidenote,
     .marginnote {
-      float: none;
-      display: none;
-      width: 100%;
-      margin: var(--spacing-md) 0;
-      margin-right: 0;
-      padding: var(--spacing-sm) var(--spacing-md);
-      background-color: var(--color-surface);
-      border-left: 3px solid var(--color-accent);
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      @include sidenotes-collapsed;
     }
   }
 
