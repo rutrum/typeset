@@ -104,6 +104,7 @@
   color: var(--color-text-muted);
   display: flex;
   flex-wrap: wrap;
+  align-items: baseline;
   gap: var(--spacing-sm) var(--spacing-md);
 }
 
@@ -118,8 +119,6 @@
 
 .article-footer {
   margin-top: var(--spacing-xl);
-  padding-top: var(--spacing-lg);
-  border-top: 1px solid var(--color-border);
 }
 
 // --------------------------------------------------------------------------

@@ -40,6 +40,19 @@
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
+// TOC moves inline above content (shared between blog and docs)
+@mixin toc-inline {
+  position: static;
+  max-height: none;
+  margin-bottom: var(--spacing-lg);
+  padding-left: 0;
+  border-left: none;
+
+  .toc {
+    padding-right: 0;
+  }
+}
+
 // --------------------------------------------------------------------------
 // Tablet & Below (Sidenotes Collapse)
 // --------------------------------------------------------------------------
@@ -60,20 +73,15 @@
 
   // TOC moves inline above content
   .page-toc {
-    position: static;
-    max-height: none;
-    margin-bottom: var(--spacing-xl);
-    padding-bottom: var(--spacing-lg);
-    border-bottom: 1px solid var(--color-border);
-
-    .toc {
-      padding-right: 0;
-    }
+    @include toc-inline;
   }
 
-  // Sidenotes collapse to toggleable inline notes
+  // Sidenotes collapse to toggleable inline notes (both blog and docs)
+  // Include .docs-content for specificity against _docs.scss desktop styles
   .sidenote,
-  .marginnote {
+  .marginnote,
+  .docs-content .sidenote,
+  .docs-content .marginnote {
     @include sidenotes-collapsed;
   }
 
@@ -91,15 +99,42 @@
 
   // Toggle visibility when checkbox is checked
   .margin-toggle:checked + .sidenote,
-  .margin-toggle:checked + .marginnote {
+  .margin-toggle:checked + .marginnote,
+  .docs-content .margin-toggle:checked + .sidenote,
+  .docs-content .margin-toggle:checked + .marginnote {
     display: block;
   }
 
   // Focus state for accessibility
   .margin-toggle:focus + .sidenote,
-  .margin-toggle:focus + .marginnote {
+  .margin-toggle:focus + .marginnote,
+  .docs-content .margin-toggle:focus + .sidenote,
+  .docs-content .margin-toggle:focus + .marginnote {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Docs: Sidenotes column removed (1100px - 1200px)
+// --------------------------------------------------------------------------
+// At this width, docs drops from 5-column to 3-column (no sidenote margin)
+// but sidenote styles are handled globally above at 1100px
+
+@media (max-width: 1200px) {
+  // Revert to 3-column layout (drop sidenote column)
+  .docs-layout {
+    grid-template-columns: var(--docs-nav-width) 1fr var(--docs-toc-width);
+  }
+
+  .docs-toc {
+    grid-column: 3;
+  }
+
+  // Disable extended width for code/tables/figures (no sidenote margin available)
+  // Only for tablet (769px-1200px); mobile has full-bleed styles
+  @media (min-width: 769px) {
+    @include tablet-content-reset;
   }
 }
 
@@ -154,6 +189,34 @@
     .table-expandable {
       width: calc(100% + var(--page-padding) * 2);
       max-width: none;
+      margin-left: calc(-1 * var(--page-padding));
+      margin-right: calc(-1 * var(--page-padding));
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
+
+    // Slideshow - full bleed
+    .slideshow {
+      width: calc(100% + var(--page-padding) * 2);
+      max-width: none;
+      margin-left: calc(-1 * var(--page-padding));
+      margin-right: calc(-1 * var(--page-padding));
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
+
+    // Horizontal rules - full bleed
+    hr {
+      width: calc(100% + var(--page-padding) * 2);
+      margin-left: calc(-1 * var(--page-padding));
+      margin-right: calc(-1 * var(--page-padding));
+    }
+
+    // Spoilers - full bleed
+    .spoiler {
+      width: calc(100% + var(--page-padding) * 2);
       margin-left: calc(-1 * var(--page-padding));
       margin-right: calc(-1 * var(--page-padding));
       border-radius: 0;
@@ -248,52 +311,8 @@
   }
 }
 
-// ==========================================================================
-// Documentation Layout Responsive
-// ==========================================================================
-
 // --------------------------------------------------------------------------
-// Docs: Sidenotes collapse (1100px - 1200px): Three-column, sidenotes inline
-// --------------------------------------------------------------------------
-
-@media (max-width: 1200px) {
-  // Revert to 3-column layout (drop sidenote column)
-  .docs-layout {
-    grid-template-columns: var(--docs-nav-width) 1fr var(--docs-toc-width);
-  }
-
-  .docs-toc {
-    grid-column: 3;
-  }
-
-  // Disable extended width for code/tables/figures (no sidenote margin available)
-  // Only for tablet (769px-1200px); mobile has full-bleed styles
-  @media (min-width: 769px) {
-    @include tablet-content-reset;
-  }
-
-  // Sidenotes collapse to inline toggleable notes
-  .docs-content {
-    .sidenote,
-    .marginnote {
-      @include sidenotes-collapsed;
-    }
-  }
-
-  // Show marginnote toggle symbol in docs
-  .docs-content .marginnote-symbol {
-    display: inline;
-  }
-
-  // Toggle visibility when checkbox is checked
-  .docs-content .margin-toggle:checked + .sidenote,
-  .docs-content .margin-toggle:checked + .marginnote {
-    display: block;
-  }
-}
-
-// --------------------------------------------------------------------------
-// Large Tablet (900px - 1100px): Two-column, TOC moves inline
+// Docs: Large Tablet (900px - 1100px): Two-column, TOC moves inline
 // --------------------------------------------------------------------------
 
 @media (max-width: 1100px) {
@@ -304,15 +323,9 @@
   }
 
   .docs-toc {
+    @include toc-inline;
     grid-column: 2;
     grid-row: 1;
-    position: static;
-    max-height: none;
-    margin-bottom: var(--spacing-lg);
-    padding-bottom: var(--spacing-md);
-    padding-left: 0;
-    border-left: none;
-    border-bottom: 1px solid var(--color-border);
   }
 
   .docs-content {
@@ -358,22 +371,21 @@
     box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
   }
 
-  // Single column layout
+  // Single column layout with TOC reordered above content
+  // Match blog layout: constrain width so full-bleed can extend into page padding
   .docs-layout {
     display: block;
     max-width: var(--content-width);
     margin: 0 auto;
   }
 
+  .docs-content {
+    display: block;
+  }
+
   // TOC inline above content
   .docs-toc {
-    position: static;
-    max-height: none;
-    margin-bottom: var(--spacing-lg);
-    padding: var(--spacing-md);
-    padding-left: 0;
-    border-left: none;
-    border-bottom: 1px solid var(--color-border);
+    @include toc-inline;
   }
 
   // Footer nav stacks

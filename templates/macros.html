@@ -11,8 +11,10 @@
 {% macro toc(toc, depth=3) %}
 {% if toc %}
 <nav class="toc" aria-label="Table of Contents">
-    <h2 class="toc-title">Contents</h2>
-    {{ self::toc_list(items=toc, current_depth=1, max_depth=depth) }}
+    <details class="toc-collapse">
+        <summary class="toc-title">Contents</summary>
+        {{ self::toc_list(items=toc, current_depth=1, max_depth=depth) }}
+    </details>
 </nav>
 {% endif %}
 {% endmacro %}

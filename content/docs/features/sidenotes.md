@@ -29,17 +29,9 @@ They work well for:
 
 ## Margin Notes
 
-{% marginnote() %}
-This is a margin note. Notice it has no number—it's for content that relates to the general area rather than a specific point.
-{% end %}
+Margin notes differ from sidenotes in one key way: they have no reference number.{% marginnote() %}This is a margin note. Notice it has no number—it's for content that relates to the general area rather than a specific point.{% end %} Use them for content that relates to a general section rather than a specific sentence.
 
-Margin notes differ from sidenotes in one key way: they have no reference number. Use them for content that relates to a general section rather than a specific sentence.
-
-They're excellent for:
-
-{% marginnote() %}
-**Quick Tip:** Margin notes work well for tips, warnings, or asides that apply to multiple paragraphs.
-{% end %}
+They're excellent for:{% marginnote() %}**Quick Tip:** Margin notes work well for tips, warnings, or asides that apply to multiple paragraphs.{% end %}
 
 - Definitions that apply to a whole section
 - Related images or diagrams
@@ -52,11 +44,7 @@ Sidenotes work alongside other markdown features.{% sidenote() %}You can use **b
 
 ### With Blockquotes
 
-> The commonality between science and art is in trying to see profoundly—to develop strategies of seeing and showing.
-
-{% marginnote() %}
-— Edward Tufte, *Beautiful Evidence*
-{% end %}
+> The commonality between science and art is in trying to see profoundly—to develop strategies of seeing and showing.{% marginnote() %}— Edward Tufte, *Beautiful Evidence*{% end %}
 
 ### With Lists
 
@@ -76,11 +64,7 @@ When using sidenotes, keep a few things in mind:
 
 **Density.** Too many sidenotes can overwhelm the margin.{% sidenote() %}One{% end %}{% sidenote() %}after{% end %}{% sidenote() %}another{% end %} becomes difficult to follow. Space them thoughtfully.
 
-{% marginnote() %}
-**Design note:** This theme automatically handles sidenote positioning. On wide screens, notes float in the margin. On narrow screens, they become toggleable inline elements.
-{% end %}
-
-**Mobile behavior.** On smaller screens, sidenotes transform into expandable notes that appear inline when tapped. This maintains accessibility without sacrificing the desktop reading experience.
+**Mobile behavior.** On smaller screens, sidenotes transform into expandable notes that appear inline when tapped.{% marginnote() %}**Design note:** This theme automatically handles sidenote positioning. On wide screens, notes float in the margin. On narrow screens, they become toggleable inline elements.{% end %} This maintains accessibility without sacrificing the desktop reading experience.
 
 ## Interaction with Code and Tables
 
@@ -93,11 +77,7 @@ def example_function(parameter_one, parameter_two, parameter_three):
     return result
 ```
 
-{% marginnote() %}
-Notice how this margin note appears below the code block rather than beside it. The layout prioritizes code readability.
-{% end %}
-
-This behavior is intentional. Code and tabular data benefit from horizontal space more than prose does, and the slight displacement of sidenotes is a worthwhile trade-off.{% sidenote() %}If you need a sidenote to appear directly beside a code block, consider restructuring so the sidenote reference appears in the paragraph before or after the code.{% end %}
+This behavior is intentional.{% marginnote() %}Notice how this margin note appears below the code block rather than beside it. The layout prioritizes code readability.{% end %} Code and tabular data benefit from horizontal space more than prose does, and the slight displacement of sidenotes is a worthwhile trade-off.{% sidenote() %}If you need a sidenote to appear directly beside a code block, consider restructuring so the sidenote reference appears in the paragraph before or after the code.{% end %}
 
 ## Syntax
 

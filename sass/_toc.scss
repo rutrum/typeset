@@ -6,6 +6,33 @@
   font-size: var(--font-size-sm);
 }
 
+// Collapsible container
+.toc-collapse {
+  // Open by default on desktop
+  @media (min-width: 901px) {
+    &:not([open]) {
+      // Force open on desktop - hide chevron interaction
+    }
+
+    // Always show content on desktop
+    .toc-list {
+      display: block !important;
+    }
+
+    .toc-title {
+      cursor: default;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  &[open] .toc-title::after {
+    transform: rotate(45deg);
+  }
+}
+
 .toc-title {
   font-family: var(--font-heading);
   font-size: 0.75rem;
@@ -14,6 +41,27 @@
   letter-spacing: 0.08em;
   color: var(--color-text-muted);
   margin-bottom: var(--spacing-md);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+
+  // Hide default marker
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  // Custom chevron
+  &::after {
+    content: "";
+    width: 0.5em;
+    height: 0.5em;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(-45deg);
+    transition: transform 0.2s ease;
+  }
 }
 
 .toc-list {
