@@ -1,4 +1,11 @@
+{% set is_video = src is ending_with(".mp4") or src is ending_with(".webm") or src is ending_with(".mov") or src is ending_with(".avi") %}
 <figure id="{{ id | default(value='fig-' ~ nth) }}" class="numbered-figure{% if wide %} wide{% endif %}">
+{% if is_video %}
+<video controls playsinline>
+  <source src="{{ src }}" type="video/{{ src | split(pat='.') | last }}">
+</video>
+{% else %}
 <img src="{{ src }}" alt="{{ alt | default(value=caption | default(value='')) }}" />
+{% endif %}
 {% if caption %}<figcaption><span class="figure-number"></span>{{ caption | markdown(inline=true) | safe }}</figcaption>{% endif %}
 </figure>

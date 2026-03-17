@@ -9,8 +9,10 @@
   margin: var(--spacing-lg) 0;
   clear: both; // Push floating sidenotes down on both sides
 
-  img {
+  img,
+  video {
     display: block;
+    width: 100%;
     max-width: 100%;
     height: auto;
   }

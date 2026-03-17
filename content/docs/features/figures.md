@@ -76,6 +76,18 @@ By default, figures stay within the content column. For larger images like panor
 
 Wide figures extend equally on both sides (centered), giving large images more room to breathe while maintaining visual balance.
 
+## Video Support
+
+The figure shortcode automatically detects video files (`.mp4`, `.webm`, `.mov`, `.avi`) and renders a `<video>` element instead of an image:
+
+```jinja2
+{{/* figure(src="/docs/example.webm", caption="A sample video with playback controls") */}}
+```
+
+{{ figure(src="/docs/example.webm", caption="Videos display with native playback controls") }}
+
+Videos include `controls` for play/pause and `playsinline` to prevent fullscreen on mobile. All the same parameters work: `caption`, `id`, and `wide`.
+
 ## Layout Behavior
 
 Figures push any floating sidenotes down to prevent overlap, similar to how code blocks and tables behave. On narrower viewports, wide figures automatically shrink to fit the content column.
