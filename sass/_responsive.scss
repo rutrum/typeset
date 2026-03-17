@@ -15,6 +15,7 @@
 @mixin tablet-content-reset {
   .prose-content {
     pre,
+    pre:has(code[data-name="wide"]),
     > table,
     .table-wrapper,
     .table-expandable,
@@ -222,6 +223,15 @@
       border-radius: 0;
       border-left: none;
       border-right: none;
+    }
+
+    // Reset full-bleed for code blocks inside spoilers
+    .spoiler-content pre {
+      width: 100%;
+      max-width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+      border-radius: var(--radius-md);
     }
   }
 

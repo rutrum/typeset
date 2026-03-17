@@ -203,15 +203,20 @@ pre {
   }
 }
 
-// Extend code blocks into margins (centered)
-// Only on desktop (>1100px); tablet and mobile have their own styles
+// Code blocks - narrow by default on desktop
+// Wide mode opt-in via ```lang,name=wide
 @media (min-width: 1101px) {
   .prose-content pre {
+    clear: both; // Push floating sidenotes down on both sides
+  }
+
+  // Wide code blocks (opt-in via name=wide annotation)
+  // Uses :has() to style pre based on child code[data-name="wide"]
+  .prose-content pre:has(code[data-name="wide"]) {
     width: calc(100% + var(--content-extend) * 2);
     max-width: calc(100% + var(--content-extend) * 2);
     margin-left: calc(-1 * var(--content-extend));
     margin-right: calc(-1 * var(--content-extend));
-    clear: both; // Push floating sidenotes down on both sides
   }
 }
 

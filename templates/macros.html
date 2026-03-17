@@ -11,7 +11,7 @@
 {% macro toc(toc, depth=3) %}
 {% if toc %}
 <nav class="toc" aria-label="Table of Contents">
-    <details class="toc-collapse">
+    <details class="toc-collapse" open>
         <summary class="toc-title">Contents</summary>
         {{ self::toc_list(items=toc, current_depth=1, max_depth=depth) }}
     </details>
@@ -177,8 +177,9 @@
     {% for subsection in subsections_data | sort(attribute="extra.weight") %}
     {% set is_ancestor = current_path is starting_with(subsection.path) %}
     {% set is_exact = subsection.path == current_path %}
+    {% set is_expanded = is_ancestor or subsection.extra.expanded | default(value=false) %}
     {% set has_children = subsection.pages | length > 0 or subsection.subsections | length > 0 %}
-    <li class="docs-nav-item docs-nav-item--section{% if is_ancestor %} is-expanded{% endif %}{% if is_exact %} is-active{% endif %}{% if has_children %} has-children{% endif %}" {% if subsection.extra.weight %}data-weight="{{ subsection.extra.weight }}"{% endif %}>
+    <li class="docs-nav-item docs-nav-item--section{% if is_expanded %} is-expanded{% endif %}{% if is_exact %} is-active{% endif %}{% if has_children %} has-children{% endif %}" {% if subsection.extra.weight %}data-weight="{{ subsection.extra.weight }}"{% endif %}>
         {% if has_children %}
         <div class="docs-nav-section-header">
             <a href="{{ subsection.permalink }}"
@@ -187,12 +188,12 @@
                 {{ subsection.title }}
             </a>
             <button class="docs-nav-toggle"
-                    aria-expanded="{% if is_ancestor %}true{% else %}false{% endif %}"
+                    aria-expanded="{% if is_expanded %}true{% else %}false{% endif %}"
                     aria-label="Toggle {{ subsection.title }} section">
                 <span class="docs-nav-toggle-icon"></span>
             </button>
         </div>
-        <div class="docs-nav-children"{% if not is_ancestor %} hidden{% endif %}>
+        <div class="docs-nav-children"{% if not is_expanded %} hidden{% endif %}>
             {{ self::docs_nav_tree(section=subsection, current_path=current_path, depth=depth + 1) }}
         </div>
         {% else %}

@@ -55,11 +55,19 @@
   position: relative;
 }
 
+// Button container stays at top-right during horizontal scroll
+.table-expand-btn-wrapper {
+  position: sticky;
+  left: 100%;
+  width: 0;
+  height: 0;
+  z-index: 10;
+}
+
 .table-expand-btn {
   position: absolute;
   top: var(--spacing-sm);
   right: var(--spacing-sm);
-  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;

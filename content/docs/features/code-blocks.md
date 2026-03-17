@@ -14,6 +14,16 @@ Technical writing often requires displaying code. This theme provides syntax hig
 
 For short code references within text, use backticks: `const x = 42`. You can mention function names like `parseInt()`, variables like `userName`, or commands like `git commit`.
 
+## Wide Code Blocks
+
+For code with long lines, you can make a code block extend into the margins by adding `name=wide` to the fence:
+
+```rust,name=wide
+fn this_is_a_wide_code_block_that_extends_into_the_margins_for_better_readability_of_long_lines() {
+    println!("This code block uses the wide option to extend beyond the normal content width.");
+}
+```
+
 ## Basic Code Blocks
 
 Wrap code in triple backticks for a code block:

@@ -21,6 +21,7 @@
 
     .toc-title {
       cursor: default;
+      pointer-events: none;
 
       &::after {
         display: none;

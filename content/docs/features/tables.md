@@ -77,7 +77,7 @@ Sometimes you need to display large datasets. This table demonstrates horizontal
 For very dense data, you can expand the table to full screen for easier reading. Click the expand button in the corner:
 
 <div class="table-expandable">
-<button class="table-expand-btn" aria-label="Expand table">⛶</button>
+<div class="table-expand-btn-wrapper"><button class="table-expand-btn" aria-label="Expand table">⛶</button></div>
 
 | Year | Q1 Revenue | Q1 Expenses | Q1 Profit | Q2 Revenue | Q2 Expenses | Q2 Profit | Q3 Revenue | Q3 Expenses | Q3 Profit | Q4 Revenue | Q4 Expenses | Q4 Profit | Annual Total |
 |------|------------|-------------|-----------|------------|-------------|-----------|------------|-------------|-----------|------------|-------------|-----------|--------------|
